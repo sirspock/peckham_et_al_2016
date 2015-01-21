@@ -1,0 +1,30 @@
+method
+  model_pointer = 'BEAVER_PROFILE_DATA'
+  coliny_ea
+  max_iterations = 100
+  max_function_evaluations = 2000
+  output debug
+
+model						
+  id_model = 'BEAVER_PROFILE_DATA'			
+  single
+  responses_pointer = 'BEAVER_PROFILE_DATA'
+
+variables
+  continuous_design = 2
+    initial_point    25.0   0.166
+    upper_bounds     400.0   1.0
+    lower_bounds     0.0   0.001
+    descriptors      'c'     'p'
+
+interface
+  analysis_driver = 'long_profile.py --model=power'
+    fork
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+
+responses 
+  id_responses = 'BEAVER_PROFILE_DATA'
+  calibration_terms = 2418
+  no_hessians			
+  no_gradients
