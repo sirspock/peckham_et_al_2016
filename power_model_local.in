@@ -8,7 +8,7 @@ method
   threshold_delta = 1e-4
   exploratory_moves basic_pattern
   contraction_factor = 0.75
-  output debug
+  #output debug
 
 model						
   id_model = 'BEAVER_PROFILE_DATA'			

@@ -3,7 +3,7 @@ method
   coliny_ea
   max_iterations = 100
   max_function_evaluations = 2000
-  output debug
+  #output debug
 
 model						
   id_model = 'BEAVER_PROFILE_DATA'			
