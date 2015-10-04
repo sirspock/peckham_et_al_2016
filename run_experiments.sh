@@ -5,7 +5,7 @@ run_experiment()
 {
   name=$1
   mkdir -p $name && cd $name
-  cp ../../$name.in ../../beaver_creek.npy .
+  cp ../../$name.in ../../beaver_creek.npy ../../long_profile.py .
   dakota -i $name.in -o $name.out
 }
 
@@ -35,7 +35,6 @@ echo $EXPERIMENT_NAMES
 echo "dakota_version: $(dakota --version)"
 echo "which_dakota: $(which dakota)"
 
-mkdir -p _experiments && cd _experiments
 for name in $EXPERIMENT_NAMES; do
   (run_experiment $name > /dev/null) &
 done
