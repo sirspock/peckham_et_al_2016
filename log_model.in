@@ -1,10 +1,9 @@
 method
   model_pointer = 'BEAVER_PROFILE_DATA'
-  optpp_g_newton
-#  nl2sol
+  nl2sol
   max_iterations = 500
   convergence_tolerance = 1e-8
-  #output debug
+  # output debug
 
 model						
   id_model = 'BEAVER_PROFILE_DATA'			
@@ -26,8 +25,6 @@ interface
 
 responses 
   id_responses = 'BEAVER_PROFILE_DATA'
-  #calibration_terms = 2418
   calibration_terms = 2425
-  #analytic_gradients
   numerical_gradients
   no_hessians			
