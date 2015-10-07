@@ -18,8 +18,8 @@ ALL_EXPERIMENTS=" \
 #  power_model_nl2sol
 
 
-cd _experiments_$GROUP_NAME
+cd output/_experiments_$GROUP_NAME
 for name in $ALL_EXPERIMENTS; do
   export EXPERIMENT_NAMES=$name
-  qsub ../run_experiments.sh -N "dakota-$name-$GROUP_NAME" -v EXPERIMENT_NAMES -l nodes=1:ppn=1
+  qsub ../scripts/run_experiments.sh -N "dakota-$name-$GROUP_NAME" -v EXPERIMENT_NAMES -l nodes=1:ppn=1
 done
