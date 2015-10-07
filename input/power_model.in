@@ -12,9 +12,9 @@ model
 
 variables
   continuous_design = 2
-    initial_point   25.0    -0.8
-    upper_bounds    50.0     1.0
-    lower_bounds   -50.0    -1.0
+    initial_point  250.0     0.99
+    upper_bounds   400.0     1.0
+    lower_bounds  -400.0    -1.0
     descriptors      'c'     'p'
 
 interface
