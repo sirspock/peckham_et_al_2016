@@ -1,22 +1,6 @@
 Dakota experiments that fit profiles to data from Beaver Creek, KY
 ==================================================================
 
-Run the experiments
--------------------
-
-Use the `submit_all_experiments.sh` script to submit each of the experiments
-as a separate job.
-
-    $ bash ./scripts/submit_all_experiments.sh
-
-Check the results
------------------
-
-When a job completes, check the best-fit parameters in it's output file,
-`<model_name>.out`, and search for a line that begins with the following:
-
-    <<<<< Best parameters
-
 Results
 -------
 
@@ -41,3 +25,20 @@ Peckham Model
 | OPT++ Gauss-Newton (numeric gradients)  | 0.0035 | -.702 |  0.99 |
 | Pattern Search (no gradients)           | 0.0041 | -.741 |  0.99 |
 | Evolutionary Algorithm (no gradients)   | 0.0031 | -.678 |  0.99 |
+
+Run the experiments
+-------------------
+
+Use the `submit_all_experiments.sh` script to submit each of the experiments
+as a separate job.
+
+    $ bash ./scripts/submit_all_experiments.sh
+
+Check the results
+-----------------
+
+When a job completes, check the best-fit parameters in it's output file,
+`<model_name>.out`, and search for a line that begins with the following:
+
+    <<<<< Best parameters
+
