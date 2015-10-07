@@ -87,6 +87,8 @@ def main():
                         help='Data file containing profile elevations')
     parser.add_argument('--sum-residuals', action='store_true',
                         help='Print only the sum of residuals to results file')
+    parser.add_argument('--fix-slope', action='store_true',
+                        help='Fix s0 from data.')
 
     args = parser.parse_args()
 
@@ -98,6 +100,8 @@ def main():
     x, z = measured_elevations_from_file(args.data)
     params['x0'] = x[0]
     params['z0'] = z[0]
+    if args.fix_slope:
+        params['s0'] = - (z[1] - z[0]) / (x[1] - x[0])
 
     if args.model == 'power':
         model = PowerLawModel(params=params)
@@ -148,7 +152,7 @@ class ChannelProfileModel(object):
         return np.array(np.mean(self.eval(x) - z), dtype=float).reshape((1, ))
 
     def residual_rms(self, x, z):
-        return np.sqrt(np.sum(self.residual(x, z) ** 2.))
+        return np.array(np.sqrt(np.sum(self.residual(x, z) ** 2.))).reshape((1, ))
 
     def gradients(self, x):
         return (self._grad_wrt_c(x), self._grad_wrt_p(x))
@@ -209,9 +213,19 @@ class PowerLawModel(ChannelProfileModel):
 
     def _grad_wrt_p(self, x):
         c, p, x0 = self._params['c'], self._params['p'], self._params['x0']
-        return - (c / p ** 2.) * (
+        if np.abs(x0) < 1e-12:
+            x0_log_x0 = 0.
+        else:
+            x0_log_x0 = np.power(x0, p) * np.log(x0)
+
+        deriv = - (c / p ** 2.) * (
             - np.power(x, p) + p * np.power(x, p) * np.log(x) +
-              np.power(x0, p) - p * np.power(x0, p) * np.log(x0))
+              np.power(x0, p) - p * x0_log_x0)
+
+        deriv[np.abs(x) < 1e-12] = - (c / p ** 2.) * (np.power(x0, p) -
+                                                      p * x0_log_x0)
+
+        return deriv
 
     def __str__(self):
         return '$f(p,x) = (1/p) \, x^p$'
