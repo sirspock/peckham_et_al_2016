@@ -19,7 +19,7 @@ variables
   continuous_design = 2
     initial_point    24.0   0.08
     upper_bounds     30.0   0.2
-    lower_bounds     20.0   0.01
+    lower_bounds     10.0   0.01
     descriptors      'c'     'p'
 
 interface
