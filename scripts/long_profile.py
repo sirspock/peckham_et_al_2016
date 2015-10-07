@@ -87,6 +87,8 @@ def main():
                         help='Data file containing profile elevations')
     parser.add_argument('--sum-residuals', action='store_true',
                         help='Print only the sum of residuals to results file')
+    parser.add_argument('--r-squared', action='store_true',
+                        help='Print only the r-squared to results file')
     parser.add_argument('--fix-slope', action='store_true',
                         help='Fix s0 from data.')
 
@@ -113,6 +115,8 @@ def main():
     if args.results:
         if args.sum_residuals:
             response = model.residual_rms(x, z)
+        elif args.r_squared:
+            response = model.r_squared(x, z)
         else:
             response = model.residual(x, z)
 
@@ -153,6 +157,9 @@ class ChannelProfileModel(object):
 
     def residual_rms(self, x, z):
         return np.array(np.sqrt(np.sum(self.residual(x, z) ** 2.))).reshape((1, ))
+
+    def r_squared(self, x ,z):
+        return np.array(r_squared(self.eval(x), z), dtype=float).reshape((1, ))
 
     def gradients(self, x):
         return (self._grad_wrt_c(x), self._grad_wrt_p(x))
