@@ -74,7 +74,8 @@ class Dakota(object):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('params', type=str, nargs='?', help='Dakota parameters file')
+    parser.add_argument('params', type=str, nargs='?',
+                        help='Dakota parameters file')
     parser.add_argument('results', type=str, nargs='?',
                         help='Dakota results file')
     parser.add_argument('--model', choices=('power', 'log', 'peckham'),
@@ -84,6 +85,8 @@ def main():
                         default='beaver_creek.npy',
                         #default='beaver_channel_profile.csv',
                         help='Data file containing profile elevations')
+    parser.add_argument('--sum-residuals', action='store_true',
+                        help='Print only the sum of residuals to results file')
 
     args = parser.parse_args()
 
@@ -104,7 +107,12 @@ def main():
         model = PeckhamModel(params=params)
 
     if args.results:
-        Dakota.print_results(args.results, model.residual(x, z),
+        if args.sum_residuals:
+            response = model.residual_rms(x, z)
+        else:
+            response = model.residual(x, z)
+
+        Dakota.print_results(args.results, response,
                              gradients=model.gradients(x))
     else:
         model.plot(x, z)
@@ -121,8 +129,6 @@ def r_squared(y, f):
 def measured_elevations_from_file(filename):
     (x, z) = np.load(filename)
     return (x, z)
-    #data = np.loadtxt(filename)
-    #return data[:, 0] * 1000., data[:, 1]
 
 
 class ChannelProfileModel(object):
@@ -136,7 +142,13 @@ class ChannelProfileModel(object):
         raise NotImplementedError('eval')
 
     def residual(self, x, z):
-        return z - self.eval(x)
+        return self.eval(x) - z
+
+    def residual_sum(self, x, z):
+        return np.array(np.mean(self.eval(x) - z), dtype=float).reshape((1, ))
+
+    def residual_rms(self, x, z):
+        return np.sqrt(np.sum(self.residual(x, z) ** 2.))
 
     def gradients(self, x):
         return (self._grad_wrt_c(x), self._grad_wrt_p(x))
@@ -197,7 +209,7 @@ class PowerLawModel(ChannelProfileModel):
 
     def _grad_wrt_p(self, x):
         c, p, x0 = self._params['c'], self._params['p'], self._params['x0']
-        return (c / p ** 2.) * (
+        return - (c / p ** 2.) * (
             - np.power(x, p) + p * np.power(x, p) * np.log(x) +
               np.power(x0, p) - p * np.power(x0, p) * np.log(x0))
 
