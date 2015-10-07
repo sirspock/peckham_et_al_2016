@@ -5,8 +5,8 @@ run_experiment()
 {
   name=$1
   mkdir -p $name && cd $name
-  cp ../../$name.in ../../beaver_channel_profile.csv ../../long_profile.py .
-  python ../../convert_profile_to_npy.py beaver_channel_profile.csv ./beaver_creek.npy
+  cp ../../../input/$name.in ../../../beaver_channel_profile.csv ../../../scripts/long_profile.py .
+  python ../../../scripts/convert_profile_to_npy.py beaver_channel_profile.csv ./beaver_creek.npy
   dakota -i $name.in -o $name.out
 }
 
