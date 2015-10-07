@@ -1,5 +1,5 @@
-Dakota experiments that fit profiles to data from Beaver Creek
-==============================================================
+Dakota experiments that fit profiles to data from Beaver Creek, KY
+==================================================================
 
 Run the experiments
 -------------------
@@ -21,7 +21,7 @@ Results
 -------
 
 Best-fit parameters for Beaver Creek main profile data with *x0=0* using the
-Power-Law Model}
+Power-Law Model
 
 | Method                                  | *p0*  | *c0* | *eps* |
 | :-------------------------------------- | :---: | :--: | :---: |
@@ -33,7 +33,7 @@ Power-Law Model}
 | Evolutionary Algorithm (no gradients)   | 0.130 | 14.8 |  786. |
 
 Best-fit parameters for Beaver Creek main profile data with *x0=0* using the
-Peckham Model}
+Peckham Model
 
 | Method                                  | *r*  | *gamma* | *eps* |
 | :-------------------------------------- | :----: | :---: | :---: |
