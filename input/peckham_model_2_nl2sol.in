@@ -1,0 +1,30 @@
+method
+  model_pointer = 'BEAVER_PROFILE_DATA'
+  nl2sol
+  max_iterations = 500
+  convergence_tolerance = 1e-8
+  # output debug
+
+model						
+  id_model = 'BEAVER_PROFILE_DATA'			
+  single
+  responses_pointer = 'BEAVER_PROFILE_DATA'
+
+variables
+  continuous_design = 2
+    initial_point    .01   -0.5
+    upper_bounds     1.0   -1e-6
+    lower_bounds     1e-8  -0.999
+    descriptors      'r'   'gamma'
+
+interface
+  analysis_driver = 'long_profile.py --model=peckham --fix-slope'
+    fork
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+
+responses 
+  id_responses = 'BEAVER_PROFILE_DATA'
+  calibration_terms = 2426
+  numerical_gradients
+  no_hessians			

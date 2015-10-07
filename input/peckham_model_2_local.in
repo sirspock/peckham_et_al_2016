@@ -1,0 +1,35 @@
+method
+  model_pointer = 'BEAVER_PROFILE_DATA'
+  coliny_pattern_search
+  max_iterations = 500
+  max_function_evaluations = 10000
+  solution_accuracy = 1e-4
+  initial_delta = 0.5
+  threshold_delta = 1e-4
+  exploratory_moves basic_pattern
+  contraction_factor = 0.75
+  # output debug
+
+model						
+  id_model = 'BEAVER_PROFILE_DATA'			
+  single
+  responses_pointer = 'BEAVER_PROFILE_DATA'
+
+variables
+  continuous_design = 2
+    initial_point    .005   -0.8
+    upper_bounds     0.01   -1e-6
+    lower_bounds     1e-6  -0.999
+    descriptors      'r'   'gamma'
+
+interface
+  analysis_driver = 'long_profile.py --sum-residuals --model=peckham --fix-slope'
+    fork
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+
+responses 
+  id_responses = 'BEAVER_PROFILE_DATA'
+  objective_functions = 1
+  no_gradients	    		
+  no_hessians			
