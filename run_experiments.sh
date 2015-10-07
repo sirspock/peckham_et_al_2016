@@ -1,11 +1,12 @@
 #! /bin/bash
-#PBS -l nodes=1:ppn=8
+#PBS -l nodes=1:ppn=1
 
 run_experiment()
 {
   name=$1
   mkdir -p $name && cd $name
-  cp ../../$name.in ../../beaver_creek.npy ../../long_profile.py .
+  cp ../../$name.in ../../beaver_channel_profile.csv ../../long_profile.py .
+  python ../../convert_profile_to_npy.py beaver_channel_profile.csv ./beaver_creek.npy
   dakota -i $name.in -o $name.out
 }
 
