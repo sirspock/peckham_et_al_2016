@@ -1,0 +1,30 @@
+method
+  model_pointer = 'BEAVER_PROFILE_DATA'
+  nl2sol
+  max_iterations = 500
+  convergence_tolerance = 1e-6
+  # output debug
+
+model						
+  id_model = 'BEAVER_PROFILE_DATA'			
+  single
+  responses_pointer = 'BEAVER_PROFILE_DATA'
+
+variables
+  continuous_design = 2
+    initial_point  -15.0     0.133
+    upper_bounds    50.0     1.0
+    lower_bounds   -50.0      .1
+    descriptors      'c'     'p'
+
+interface
+  analysis_driver = 'long_profile.py --model=power'
+    fork
+    parameters_file = 'params.in'
+    results_file = 'results.out'
+
+responses 
+  id_responses = 'BEAVER_PROFILE_DATA'
+  calibration_terms = 2426
+  numerical_gradients
+  no_hessians			
