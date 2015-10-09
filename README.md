@@ -19,12 +19,14 @@ Power-Law Model
 Best-fit parameters for Beaver Creek main profile data with *x0=0* using the
 Peckham Model
 
-| Method                                  | *r*  | *gamma* | *r^2* |
-| :-------------------------------------- | :----: | :---: | :---: |
-| NL2SOL (numeric gradients)              | 0.0035 | -.702 |  0.99 |
-| OPT++ Gauss-Newton (numeric gradients)  | 0.0035 | -.702 |  0.99 |
-| Pattern Search (no gradients)           | 0.0041 | -.741 |  0.99 |
-| Evolutionary Algorithm (no gradients)   | 0.0031 | -.678 |  0.99 |
+| Method                                  |  *r*   | *gamma* | *r^2* |
+| :-------------------------------------- | :----: | :-----: | :---: |
+| NL2SOL (analytic gradients)             | 0.0035 |  -.701  |  0.99 |
+| NL2SOL (numeric gradients)              | 0.0035 |  -.702  |  0.99 |
+| OPT++ Gauss-Newton (analytic gradients) | 0.0035 |  -.701  |  0.99 |
+| OPT++ Gauss-Newton (numeric gradients)  | 0.0035 |  -.702  |  0.99 |
+| Pattern Search (no gradients)           | 0.0041 |  -.741  |  0.99 |
+| Evolutionary Algorithm (no gradients)   | 0.0031 |  -.678  |  0.99 |
 
 Run the experiments
 -------------------
