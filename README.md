@@ -1,3 +1,6 @@
+Peckham et al., 2016. Computers and Geosciences
+===============================================
+
 Dakota experiments that fit profiles to data from Beaver Creek, KY
 ==================================================================
 
@@ -43,4 +46,3 @@ When a job completes, check the best-fit parameters in it's output file,
 `<model_name>.out`, and search for a line that begins with the following:
 
     <<<<< Best parameters
-
