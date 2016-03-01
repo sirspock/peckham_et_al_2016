@@ -7,7 +7,7 @@ To make a PDF,
 
 Cite as,
 
-    Peckham, S. D., Kelbert, A., Hill, M. C., Hutton, E. W. H. (in press).
-    *Towards Uncertainty Quantification and Parameter Estimation for Earth
-    System Models in a Component-based Modeling Framework*. Computers &
-    Geosciences.
+Peckham, S. D., Kelbert, A., Hill, M. C., Hutton, E. W. H. (in press).
+*Towards Uncertainty Quantification and Parameter Estimation for Earth
+System Models in a Component-based Modeling Framework*. Computers &
+Geosciences.
