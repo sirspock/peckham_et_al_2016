@@ -1,0 +1,2686 @@
+%%
+%% Copyright 2007, 2008, 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+%% SP 2008/03/01
+%%
+%%
+%%
+%% $Id: elsarticle-template-harv.tex 4 2009-10-24 08:22:58Z rishi $
+%%
+%%
+
+%% double line spacing
+% \documentclass[review,authoryear,12pt]{elsarticle}
+
+%% single line spacing
+%\documentclass[preprint,authoryear]{elsarticle}
+\documentclass[authoryear,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,authoryear,1p,times]{elsarticle}
+%% \documentclass[final,authoryear,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,authoryear,3p,times]{elsarticle}
+%% \documentclass[final,authoryear,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,authoryear,5p,times]{elsarticle}
+%% \documentclass[final,authoryear,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+ \usepackage{graphicx, subfigure}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+\usepackage{lineno}
+\usepackage{url}
+\usepackage{amsmath}   %% for "align" and "bmatrix" environments
+
+% This allows spacing in bmatrix to be adjusted (SDP, 10/8/15)
+\makeatletter
+\renewcommand*\env@matrix[1][\arraystretch]{%
+  \edef\arraystretch{#1}%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+\makeatother
+
+%% AK
+\def\pd#1#2{\dfrac{\partial #1}{\partial #2}}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon (default)
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   authoryear - selects author-year citations (default)
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%   longnamesfirst  -  makes first citation full author list
+%%
+%% \biboptions{longnamesfirst,comma}
+
+% \biboptions{}
+
+\journal{Computers \& Geosciences}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+\title{{\large Towards Uncertainty Quantification and Parameter Estimation \\
+for Earth System Models in a Component-based \\
+Modeling Framework}}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author[label1]{Scott D. Peckham\corref{cor1}}
+%\author[label1]{Scott D. Peckham\corref{cor1}\fnref{fn1}}
+\ead{Scott.Peckham@colorado.edu}
+
+\author[label2]{Anna Kelbert}
+%\ead{anna@ceoas.oregonstate.edu}
+
+\author[label3]{Mary C. Hill}
+%\ead{mchill@ku.edu}
+
+\author[label1]{Eric W.\,H. Hutton}
+%\ead{Eric.Hutton@colorado.edu}
+
+\cortext[cor1]{Corresponding author}
+
+\address[label1]{INSTAAR, University of Colorado, Boulder, CO 80309}
+% \address[label2]{Geomagnetism Program, U.S. Geological Survey, Golden, CO}
+% Using old affiliation as Anna requested (1/5/15).
+\address[label2]{CEOAS, Oregon State University, Corvallis, OR 97331}
+\address[label3]{Dept. of Geology, University of Kansas, Lawrence, KS 66045}
+
+%\address[label1]{INSTAAR, University of Colorado, Boulder, CO, Scott.Peckham@colorado.edu}
+%% \address[label2]{Geomagnetism Program, U.S. Geological Survey, Golden, CO, akelbert@usgs.gov}
+%% Using old affiliation as Anna requested (1/5/15).
+%\address[label2]{CEOAS, Oregon State University, Corvallis, OR, anna@ceoas.oregonstate.edu}
+%\address[label3]{Dept. of Geology, University of Kansas, Lawrence, KS, mchill@ku.edu}
+
+
+\begin{abstract}
+% Must be less than 300 words.
+Component-based modeling frameworks make it easier for users to access, configure, couple, run and test
+numerical models. However, they do not typically provide tools for uncertainty quantification or data-based
+model verification and calibration.  To better address these important issues, modeling frameworks should be
+integrated with existing, general-purpose toolkits for optimization, parameter estimation and uncertainty
+quantification.
+
+This paper identifies and then examines the key issues that must be addressed in order to make a
+a component-based modeling framework interoperable with general-purpose packages for model
+% uncertainty
+analysis.
+As a motivating example, one of these packages, DAKOTA, is applied to a representative but nontrivial
+surface process problem of comparing two models for the longitudinal elevation profile of a river to
+observational data.  Results from a new mathematical analysis of the resulting nonlinear least squares
+problem are given and then compared to results from several different optimization algorithms in
+DAKOTA.
+%The example shows how some available methods are more robust than others. It also shows how alternative
+%models can be compared, which would be used often in the context of a component-based modeling
+%framework.  Indeed, the ability to test models against data objectively is a primary motivation for including
+%these methods in the framework.
+\end{abstract}
+
+\begin{keyword}
+model uncertainty \sep modeling frameworks \sep component-based modeling
+\sep optimization \sep inverse problems \sep nonlinear least squares
+\sep parameter estimation \sep longitudinal river elevation profiles
+
+%% keywords here, in the form: keyword \sep keyword
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+%% \parindent = 0pt
+
+%% main text
+%-------------------------------------------------------------------------------------------------------
+%\newpage
+%\section{Table of Contents}
+%
+%%
+%\begin{itemize}
+%\item Introduction
+%	\begin{itemize}
+%	\item What is a Model?
+%	\item What is a Modeling Framework?
+%	\item Model Validation and Sources of Error
+%		\begin{itemize}
+%		\item Developer and User Errors     %%% Move down again?
+%		\item Model Inadequacy
+%		\item Input Data Inadequacy
+%		\item Model Parameter and Input Data Uncertainties  %%%%%%%
+%		\end{itemize}
+%	\item Forward vs. Inverse Modeling
+%	%% \item Linking Model Parameters to Simulated Data Through Model Coupling  %%%%%
+%	\end{itemize}
+%%------------------------------------------------------------------------
+%\item Key Concepts and Terms of Uncertainty Quantification and Sensitivity Analysis
+%	\begin{itemize}
+%	\item Exploring the Model Parameter Space
+%		\begin{itemize}
+%		\item Model Parameter Studies
+%		\item Design of Computer Experiments
+%		\end{itemize}
+%	\item Model Uncertainty Quantification
+%		\begin{itemize}
+%		\item Model Input Variables with Aleatoric Uncertainty
+%		\item Model Input Variables with Epistemic Uncertainty
+%		\item Propagation of Errors or Uncertainty
+%		\end{itemize}
+%	\end{itemize}
+%%------------------------------------------------------------------------
+%\item Introduction to Inverse Modeling Methods
+%	\begin{itemize}
+%	\item Key Concepts and Terms
+%	\item Constructing an Objective Function
+%		\begin{itemize}
+%		\item Bayesian Calibration
+%         	\end{itemize}
+%	\item Optimization Methods
+%		\begin{itemize}
+%		\item Gradient-Based Optimization
+%		\item Gradient-Free Optimization
+%		\end{itemize}
+%	\end{itemize}
+%%------------------------------------------------------------------------
+%\item Review of General-Purpose Software for Uncertainty Quantification,
+%Inverse Modeling and Sensitivity Analysis
+%%------------------------------------------------------------------------
+%\item Optimization Test Problem:  Finding Best Fits to Longitudinal Profiles
+%%------------------------------------------------------------------------
+%\item Including Inverse Modeling and Uncertainty Quantification in a
+%Component-based Modeling Framework
+%	\begin{itemize}
+%	\item Model Coupling Formalism
+%	\item Stand-alone Numerical Model
+%	\item Models Coupled in Series
+%	\item Models Coupled in Parallel
+%	%----------------------------------
+%	\item Joint Inversion in a Component-Based Modeling Framework
+%	\item Data Sensitivity with Respect to Input Model Parameters
+%	\end{itemize}
+%\item Conclusions and Recommendations
+%\item Acknowledgments
+%\item References
+%\end{itemize}
+%
+
+%=============================================================================
+\newpage
+\section{Introduction}
+
+Many Earth science domains rely on numerical modeling to gain a better understanding of Earth system processes.
+Modeling addresses a wide variety of problems in the realms of climate, weather, hydrology, land surface dynamics,
+geodynamics, geophysics, hydrogeophysics and structural geology, among others.  Earth system models are based
+on physical, chemical, biological and stochastic processes that make it theoretically possible to predict changes likely to
+occur at, below, or above a particular location on Earth in response to various types of forcing. 
+Data-based model verification and validation -- including more formal data integration through model parameter
+estimation -- and quantification of ever-present uncertainty are critical in order to develop reliable numerical models
+for observed Earth processes.
+
+The Community Surface Dynamics Modeling System, or CSDMS
+\citep{Peckham_et_al_2013, Syvitski_et_al_2014}
+is one example of a component-based modeling framework, employed in
+the realm of Earth surface process dynamics, with capabilities currently being extended to deep Earth process
+modeling. Just as CSDMS provides interoperability and coupling mechanisms for process-based models, it could
+also provide simplified access to model analysis programs.
+In this paper, we discuss extensions to CSDMS that would be required for its component-based framework to
+interoperate with uncertainty quantification and parameter estimation (inverse modeling) toolkits.
+%This integration is expected to provide numerous benefits for modelers.
+%=============  Suggested by Mary, but but to reduce word count. (SDP, 1/6/16)
+%In this paper, we discuss and illustrate the opportunities provided through such a multilevel integration of modeling
+%capabilities. The more advanced model analysis methods become increasingly important as models become more
+%complicated. It provides a mechanism by which relations that may be obvious to those familiar with individual
+%component models can become evident to those seeking combined modeling capabilities. The integration of more
+%advanced model analysis methods also provides a challenge to the developers of those methods. Currently there is
+%a wide range of opinions and methods being used to analyze models in the Earth sciences. There is considerable
+%disagreement about terminology, which methods to use, and what results mean. If the field is to move forward and
+%if models are to achieve greater ability to inform scientific advances and policy decisions, greater understanding of
+%models and model analysis methods is needed. The integration of component-based modeling frameworks with
+%model analysis tools discussed in this work is a critical step in this process.
+
+%===============================================================================
+% Removed by SDP for Jan 2016 resubmission
+%===============================================================================
+%However, our work with the large and diverse CSDMS modeling community has shown that many
+%modelers are unfamiliar with uncertainty analysis methods.  We therefore begin by reviewing key
+%concepts, terms and methods, in order to better explain the issues and the numerous benefits that
+%this integration would provide for modelers.
+
+%=============================================================================
+\section{Background:  Models and Modeling Frameworks}
+\label{framework_background}
+
+\subsection{What is a Model?}
+\label{intro.model}
+
+There are many possible definitions of the word {\it model}.  This paper is concerned with {\it computational models}
+that predict the evolution of one or more system state variables over time as a function of observations at a given
+start time.  These predictions are made using a set of equations that express laws of physics and other constraints
+on the problem of interest.  Laws of physics are often expressed as differential equations that include a time derivative,
+and computational models use a discretization of space and time and some combination of {\it numerical methods} to
+solve these governing equations. 
+%The result {\it simulated observations} (which could be compared with independent
+%measurements) and {\it predictions} for future times.
+%The equations that define a model often contain
+%{\it design parameters} (also called control, model or configuration parameters)
+%that remain fixed for a given model run, but which may be adjusted between model runs.
+%These are commonly called {\it design parameters}, but are sometimes called control, model or configuration parameters.
+Models generally require values for one or more {\it input variables}, often used to describe the initial state of the
+system and often specified as spatial scalar or vector fields.  These may be measured or estimated and are distinct
+from the model's {\it design parameters} (also called control, model or configuration parameters), that must be
+specified in the equations that define the model itself.
+A model run generates numerical values for {\it output variables} (i.e. simulated observations or predictions) that
+can be compared to observations.   % $y^{(obs)}$.
+A very simple example is given by $y = c \, x^p$, where $x$ and $y$ are input and output variables,
+respectively, and $c$ and $p$ are design parameters.
+
+
+%A key characteristic of this type of model is that it also requires one or more {\it input variables} (or input data).
+%These may be measured or estimated. They often describe the initial state of the system and are often spatial
+%scalar or vector fields.
+%For example, a model may use the equation
+%$y^{(sim)} = f(x;c,p) = c \, x^p$,
+%where $x$ is the input variable, and $c$ and $p$ are design parameters.
+%The term {\it output variables} is used to describe simulated observations or predictions generated by the model, and
+%these would often be compared to {\it observations}, $y^{(obs)}$.
+
+% Input and output variables are sometimes called ``independent'' and ``dependent'' variables.
+
+%A {\it data set} can also be viewed as a source of ``output variables'', but it lacks any input variables.
+
+%-------------------------------------------------------------------------------------------------------
+\subsection{What is a Modeling Framework?}
+
+Over the last decade, a number of different {\it modeling frameworks} have emerged, both
+within academia and at several different federal agencies.  An example from the academic
+modeling community is the NSF-funded CSDMS project (cited in the Introduction)
+% \citep{Peckham_et_al_2013},
+which primarily serves the Earth surface process modeling community.
+Other examples from the federal or operational modeling community include:
+%
+\begin{itemize}
+\item ESMF (Earth System Modeling Framework), which primarily serves the atmosphere and ocean modeling community,
+\item OMS (Object Modeling System), developed by the USDA (US Department of Agriculture) primarily for agricultural modeling and
+\item FRAMES (Framework for Risk Analysis in Multimedia Environmental Systems), developed by the US EPA (Environmental Protection Agency), primarily for environmental modeling.
+\end{itemize}
+%
+% (\citet{ESMF,OMS,FRAMES}).
+(\citet{hill2004architecture, david2002object, whelan1997concepts}).
+A project called Earth System Bridge, funded as a building block in NSF's
+EarthCube initiative, is developing adapters that make it easy for any given model
+to be prepared as a plug-and-play component that can be used in (or moved between)
+multiple modeling frameworks, including those above.
+
+The intent of all such modeling frameworks is to provide a software environment in which users can
+choose models from a collection and easily couple them to create customized, composite models
+in a plug-and-play manner.  This facilitates code re-use and interoperability.
+The models in the collection may span a wide variety of different physical processes and are often
+written by many different authors, typically experts in their field.  In many cases, the
+input variables required by one model can be provided by another model in the collection, so
+there is strong motivation to couple them.  However, the models typically differ in many
+ways, such as their programming language, computational grid, time-stepping scheme,
+variable names and units.
+In addition to providing a simple mechanism for coupling models, modeling frameworks
+typically contain {\it service components} or {\it mediators} that automatically reconcile
+differences between the models that would otherwise prevent them from sharing variables.
+Examples of mediators include spatial regridders, time interpolators, unit converters and
+semantic mediators.  These mediators and other capabilities of the framework --
+such as the ability to write composite model output to different file formats with standardized
+metadata, or to provide a graphical user interface (GUI) and help system --
+provide both model users and developers with significant added value.
+
+There is a strong interest in adding a new capability to modeling frameworks, namely
+the ability to track and analyze uncertainty either for a single (stand-alone) model or
+for a coupled set of models.  For example, this is one of the major goals of the second
+funding cycle of the CSDMS project.
+% No reference available;  SDP, 1/17/15
+%\citep{CSDMS2}.
+Since several powerful, integrated packages for uncertainty analysis already exist (Section~\ref{tools}),
+integrating one or more of them into a modeling framework seems like the best way to achieve this goal.
+One such package, called DAKOTA \citep{Adams_et_al_2013a,Adams_et_al_2013b} is of particular
+interest because it provides a unified interface to a large collection of open-source packages for
+optimization and uncertainty quantification.
+% and covers most of the methods mentioned in this paper. 
+%While this integration poses technical challenges, it also poses social and communication
+%challenges since many modelers are unfamiliar with the rich variety of methods for
+%uncertainty analysis and inverse modeling.  This paper seeks to explore and address some
+%of these technical and social challenges.
+
+DAKOTA and similar packages offer a suite of uncertainty analysis tools, including tools for model
+sensitivity analysis (e.g. sampling methods to explore the design parameter space) as well as
+inverse modeling (or parameter estimation).  However, the sensitivity analysis tools are easier to
+integrate within a modeling framework because they don't usually require capabilities beyond what
+a typical model (or composite model) already provides.  By contrast, inverse modeling requires
+construction of a suitable objective function and computation of derivatives and is also affected by
+how models are coupled.
+So although we are interested in bringing all of the capabilities of packages like DAKOTA into
+modeling frameworks like CSDMS, this paper will focus on what a modeling framework must do to
+accommodate inverse modeling.
+%Therefore, to set the stage for what a modeling framework must do to accommodate inverse modeling,
+To set the stage, the next section provides a very brief, self-contained overview of inverse modeling.
+For a more extensive treatment, see
+\cite{Tarantola_2005}, \cite{Caers_2011} or \cite{Aster_et_al_2013}.
+ 
+% \textbf{Include the pitch for ``joint inversion in a framework" here, with a nod to Section 8.}
+
+% REMOVED TO REDUCE WORD COUNT. (SDP, 10/7/15)
+%Support for simplified and robust inverse modeling in a component-based modeling framework like CSDMS
+%also poses challenges with regard to constructing appropriate objective functions, selecting appropriate
+%optimization methods, encapsulation and efficient computation.  In Section (\ref{framework}), we examine
+%these issues in the context of (1) a single model, (2) models coupled in series and (3) models coupled in
+%parallel.  We then discuss requirements for {\it joint inversion} in a modeling framework.
+%%% in Section (\ref{framework.inversion}).
+%Implementation of these capabilities would allow innovative approaches to many of the parameter
+%estimation and sensitivity analysis problems in a complex Earth system.
+
+%-------------------------------------------------------------
+% Note: I'll be writing this soon, drawing from the material
+% commented out here from Section 8. (SDP. 1/15/15)
+%-------------------------------------------------------------
+%The rationale for including inversion and uncertainty quantification tools into a modeling and model coupling framework is twofold.
+
+%First, there is great value in facilitating the modeler access to these tools. Assessing uncertainties that are due to modeling approximations and sensitivity to input parameters is a goal of primary importance for any modeler. Furthermore, if measured data are available, the more realistic numerical models could use them for model validation and calibration. They could also make use of the data with the inversion / parameter estimation tools to obtain optimal physical parameter values that best match the observed data, thus providing a rigorous pathway to rapid physical insights.
+%While most modeling codes would benefit from easy integration with these methods (Section~\ref{methods}), and while they also lend themselves easily to generic toolboxes (Section~\ref{software}), there is currently a steep learning curve to using these tools. Many of the concepts are initially foreign to a typical Earth system modeler, and it is easy to get lost in the variety of methods. Interfacing these toolboxes with the Earth system codes serves as an additional bottleneck to making these capabilities easily available.
+%
+%A second important rationale for getting this done is the use of such tools in a complex system that involves several modeling components within a framework. Implementation of inversion and uncertainty quantification capabilities in the context of model coupling would allow completely novel approaches to many of the parameter estimation and sensitivity analysis problems in a complex Earth system.
+%
+%Here, we try to break this daunting task down into manageable pieces, and explain how the inversion and uncertainty quantification tools could be made readily available in a modeling framework, review the components that would be needed, and provide a guide on best practices.
+
+
+%=========================================================================
+% SDP moved subsection on Model Validation and Sources of Error toward the end. (1/6/16)
+%=========================================================================
+
+
+
+
+% AK: A VERSION OF THIS COULD BE INCLUDED WITH CAVEATS. COMMENTED FOR NOW.
+%Inverse modeling relies more on inference than forward modeling.  A whimsical but illustrative
+%example of inverse modeling is trying to determine the contents of a wrapped Christmas package
+%by shaking, tipping, etc.
+
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Linking Models Parameters to Simulated Data Through Model Coupling}
+%\label{intro.modelcoupling}
+%
+%\textbf{AK: INTRODUCE THE THREE SETUPS HERE}
+%\textbf{AK: SINCE WE DON'T HAVE THE "SISTER SECTION" ON UNCERTAINTY AND DON'T USE THIS UNTIL SECTION 8, LET'S JUST KEEP IT THERE FOR NOW - MAY CHANGE THIS AT REVISION}
+
+%=====================================================================================
+% Cut by SDP for Jan 2016 resubmission
+%=====================================================================================
+%\section{Key Concepts and Terms of Uncertainty Quantification and Sensitivity Analysis}
+%\label{uncertainty_background}
+%
+%This section reviews key concepts, terms and methods used in the realm of {\it uncertainty quantification}
+%and {\it sensitivity analysis}.
+%% since many of them may be unfamiliar to some modelers.
+%A basic understanding of these is needed to discuss
+%and appreciate the wide variety of capabilities available within existing software packages for the analysis of
+%model uncertainty.  Methods in this section are used in a {\it forward modeling} context to understand how a
+%model's output variables respond to changes in either input variable or design parameters.
+%Inverse modeling methods and concepts are discussed in Section (\ref{inverse_background}).
+%
+%% AK: I am reorganizing this to be more coherent; both Parameter Studies and the "Design of Computer Experiment" are subsets of sampling methods. On the other hand, Model Sensitivity Analysis needs a separate subsection. This will be included in the Inverse Methods write up that follows.
+%%-------------------------------------------------------------------------------------------------------
+%%\subsection{Model Sensitivity Analysis and Parameter Studies}
+%\subsection{Exploring the Model Parameter Space}
+%
+%There is a wide range of methods for exploring a model's multidimensional parameter space, known collectively as ``sampling'' or ``exploration'' methods.
+%
+%\subsubsection{Model Parameter Studies}
+%
+%% AK: reverting Mary's text here because of the reorganization...
+%%Model sensitivity analysis methods for studying parameters, typically consists of computing response data sets at a selection of points in a model's parameter space.
+%%Local methods focus on small or limited parts of the parameter space, and often include the calculation of derivatives; global methods sample the entire parameter space and produce sensitivity analysis results that are overall averages. For local methods, sampling patterns may include the following.
+%
+%A ``parameter study'' typically consists of computing response data sets at a structured selection of points in a model's parameter space. Here, the response may be any simulated value or an objective function, and the word {\it points} refers to points in the multidimensional design parameter space.
+%Four common parameter study methods are:
+%{\it (1) Vector}:  evaluate the response at points along a straight line in parameter space,
+%{\it (2) List}: evaluate the response at an arbitrary set of user-specified points,
+%{\it (3) Centered}: evaluate the response at a cross-like set of points near a specified point, and
+%{\it (4) Multidimensional}: evaluate the response at a lattice of evenly-spaced points.
+%%%
+%%\begin{itemize}
+%%\item {\bf Vector} = evaluate the response at points along a straight line in parameter space.
+%%\item {\bf List} = evaluate the response at an arbitrary set of user-specified points.
+%%\item {\bf Centered} = evaluate the response at a cross-like set of points near a specified point.
+%%\item {\bf Multidimensional} = evaluate the response at a lattice of evenly-spaced points in a region of the parameter space.
+%%\end{itemize}
+%%%
+%Results can be examined by the user, visualized using line graphs or other plots, or provided as input to subsequent analysis routines.
+%
+%\subsubsection{Design of Computer Experiments}
+%
+%The expression {\it design of computer experiments} refers to a collection of methods that have the primary purpose of extracting as much information as possible (e.g. trend data) from a problem's parameter space using only a limited number of sample points.  Some methods focus on sample points that are at the extremes of the parameter space, such as:  Central Composite Design, Box-Behnken Design, Full Factorial Design and Fractional Factorial Design, as a means of identifying trends.  Other methods use a collection of sample points that are ``space-filling'', with good coverage of the entire parameter space, such as: Orthogonal Array Designs, Latin Hypercube Sampling, Monte Carlo Sampling and Quasi Monte Carlo Sampling.
+%
+%
+%%-------------------------------------------------------------------------------------------
+%\subsection{Model Uncertainty Quantification}
+%
+%The expression {\it uncertainty quantification} usually refers to the specific process of studying how uncertainties in input variables are forward propagated through a computational model to produce uncertainties in output (or response) variables.  Methods for doing this are also called {\it nondeterministic analysis methods}.
+%
+%%    (EXPLAIN aleatoric and epistemic here.)
+%
+%% AK: I inserted this text from the proposal; I think it's relevant. Perhaps ok to simplify. Need to fix the references.
+%% SDP:  This didn't fit well in the intro to Section 3, so I've moved it here until I decide how to include it.
+%%--------------------------------------------------
+%%Overall, {\it uncertainty quantification} is concerned with determining the ranges within which simulated values could vary without contradicting knowledge about observations, prior information, and known system characteristics too much. Environmental modeling is often used to predict effects of future anthropogenic and/or natural occurrences. Predictions are always uncertain. Epistemic and aleatory prediction uncertainty is caused by data errors and scarcity, parameter uncertainty, model structure uncertainty, and scenario uncertainty (Morgan and Henrion, 1990; Neuman and Wierenga, 2003; Meyer et al., 2007; Renard et al., 2011; Clark et al., 2011). Data errors and scarcity, as well as other issues, can be addressed using Bootstrap methods (e.g., Davison and Hinkley, 1999). Parameter uncertainties are commonly propagated into measures of prediction uncertainty using two measures: individual confidence intervals based on classical regression theories (Draper and Smith, 1998; inclusion of prior information in regression theories is discussed by Hill and Tiedeman, 2007, among others) and individual credible intervals based on Bayesian theories (Box and Tiao, 1992; Casella and Berger, 2002; Lu et al., 2012). Computational cost varies widely by method; for example, high-dimensional non-Gaussian inversion may be intractable unless exploitable structure such as Petra et al (2014) is found. Model structure uncertainty can be addressed using alternative models (e.g., Foglia et al., 2013).
+%
+%\subsubsection{Model Input Variables with Aleatoric Uncertainty}
+%
+%{\it Aleatoric uncertainty} is a term used for uncertainty that is viewed as intrinsically stochastic and beyond our control.  If an input variable is viewed as having aleatoric uncertainty, the uncertainty can be modeled if there is sufficient information to assign a probability distribution to it.
+%In this case, a variety of methods can be used to estimate the probability distributions (or at least statistics such as mean, standard deviation, coefficients of variation and 95\% confidence intervals) of the output (or response) variables that result from forward propagation of input errors through the model.
+%% DAKOTA supports most of the well-known probability distributions.
+%
+%\subsubsection{Model Input Variables with Epistemic Uncertainty}
+%
+%{\it Epistemic uncertainty} is a term used for uncertainty that we think could potentially be reduced with a better model or better data.
+%If an input variable is viewed as having epistemic uncertainty, it is generally assumed that there is not enough information to assign a probability distribution to it.  In this case, various types of interval analysis are used which assume only that the input variable lies in a particular range of values or interval. Such methods then compute analogous intervals for the output variables that result from forward propagation of input errors through the model.
+%
+%DAKOTA contains a variety of methods intended for the case where input variables have aleatoric uncertainty, as well as other methods intended for the case where they are subject to epistemic uncertainty.  DAKOTA also has the ability to analyze cases where the input variables have a mixture of aleatoric and epistemic uncertainty (e.g. a nested Dempster-Shafer evidence theory approach.) Many of these methods also support the case where multiple input variables are correlated.
+%
+%%-------------------------------------------------------------------------------------------------------
+%\subsubsection{Propagation of Errors or Uncertainty}
+%
+%This may be thought of as a special type of uncertainty quantification that is simpler and more tractable.
+%The term ``propagation of errors'' refers to methods for computing or estimating the error associated with
+%variables that are computed as functions of other variables, assuming that the errors associated with the
+%original variables are known. In other words, the errors associated with the quantity $g(X)$ are computed
+%in terms of the errors associated with $X$.
+%%% (CHECK:  Is it assumed that the errors of the original variables come from a Gaussian distribution?)
+%The book by \citet{Taylor_1982} provides error formulas for many common functions of one or more variables.
+%The Wikipedia article titled ``Propagation of Uncertainty'' also provides a table of such error formulas.
+%In these formulas, error is typically quantified in terms of standard deviations or covariances.  However,
+%for the typical case where $g(X)$ is nonlinear, the formulas are obtained as {\it truncated Taylor series
+%expansions} and are therefore biased.
+%
+%There is also a standard theorem in probability theory that allows the distribution of a function of a random
+%variable (and therefore standard deviation, etc.) to be computed exactly when the distribution of the random
+%variable itself is known. The formula is valid for arbitrary cumulative distribution functions (CDFs);  the original
+%random variable doesn't need to come from a Gaussian (or normal) distribution.  The theorem states that if
+%$X$ is a random variable with CDF  given by $F_X(x)$, and $Y = g(X)$, where $g(x)$ is a strictly increasing
+%(or decreasing) function, then the CDF of $Y$ is given by $F_Y(y) = F_X( g^{-1}(y))$.  (The strictness ensures
+%that the inverse of $g(x)$ is well-defined.)  The PDF of $Y$ can be computed as
+%$f_Y(y) = dF_Y(y)/dy$.  If $y_1$ and $y_2$ are the min and max possible values of $Y$, then $F_Y(y) = 0$
+%for $y < y_1$ and $F_Y(y) = 1$ for $y > y_2$.  When applicable, this formula provides a more precise method
+%for computing propagation of errors.  See \citet{Ross_2001}.
+%
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Sensitivity Analysis}
+%
+%Finally, the closely related methods of {\it sensitivity analysis} sample the model parameter space and compute local derivatives with the goal of identifying what is important --- which observations are important to model parameters (and thus what parameters are informed by the observations) and which model parameters are important to forecasts or predictions.
+%% REMOVED BY SDP: 10/12/15 due to reviewer comment.
+%% , and which observations are important to the forecasts or predictions.
+%Note that model parameters can be defined to control many aspects of a system, including forcings, boundary conditions, and characteristics distributed in space and/or time.
+%Results of model parameter sensitivity analysis can also inform inverse modeling metrics, predictions, and quantified uncertainty and risk [e.g., \citet{VanWerkhoven_2008}; \citet{Saltelli_2008}].
+%%% \citet{Plischke_2013}].   %% Don't have this ref.
+%
+%%Within these broad goals, parameter sensitivity analysis can be used to (a) detect when increasing model complexity can no longer be supported by observations and whether it is likely to affect predictions of interest [e.g., \citet{Saltelli_1999}; \citet{VanWerkhoven_2008}; \citet{Rosolem_2012}; \citet{Gupta_2012}], (b) reduce the time of model calibration by focusing estimation efforts on parameters important to calibration metrics and predictions [e.g., \citet{Anderman_1996}; \citet{Hamm_2006}; \citet{Zambrano-Bigiarini_Rojas_2013}], (c) determine priorities for theoretical and site-specific model development [e.g., \citet{Hill_and_Tiedeman_2007}; \citet{Saltelli_2008}; \citet{Kavetski_and_Clark_2010}], (d) identify advantageous placement and timing of new measurements [e.g., \citet{Musters_and_Bouten_2000,Weerts_2001,Vrugt_2001,Tiedeman_2003,Tiedeman_2004,Tonkin_2007,Fienen_2010}], and (e) investigate contributions to calculated measures of uncertainty analysis \citep[among others]{Saltelli_2008}. Sensitivity analysis evaluated through time has been considered by, e.g., \citet{Wagener_2003,Cloke_2007,Herman_2013a}, and \citep{Rakovec_2014}.
+%
+%{\it Global} methods of sensitivity analysis, such as the popular variance-based {\it Sobol' method} [e.g., \citet{Sobol_2001}; \citet{Saltelli_2002}], the Fourier amplitude sensitivity testing (FAST) \citep{Cukier_1973,Cukier_1975,Cukier_1978,Saltelli_1999}, the method of Morris (MoM) \citep{Morris_1991,Zhan_2013},
+%%% Herman_2013b}, % Couldn't find this ref.
+%regional sensitivity analysis (RSA) \citep{Hornberger_and_Spear_1981,Freer_1996}, and the delta method \citep{Borgonovo_2007}, are based on sampling of the model parameter space.
+%With some exceptions, global methods tend to be computationally demanding.  Most produce measures which are averages for all or some of the parameter space.  While this produces stable solutions, it can also mask important dynamics \citep{Rakovec_2014}.
+%%Since the number of forward model runs depends linearly on the number of model parameters, they become impractical for large model parameter spaces and models with run times that exceed even a few seconds. 
+%
+%The less computationally demanding {\it local} sensitivity analysis methods are typically based on the gradients (derivatives) of the model output with respect to parameter values evaluated at a single location in the parameter space [e.g., \citet{Hill_and_Tiedeman_2007}; \citet{Oliver_2008}]. Parameter interactions on predictions can be accounted for using, for example, the method described by \citet{Sobol_and_Kucherenko_2010} or accounting for parameter correlations in local methods \citep{Rakovec_2014}. The convenience of local methods has resulted in their considerable use [e.g., \citet{DAgnese_1999,Kunstmann_2002}]. However, their applicability to nonlinear models, including models with spurious results, is of concern \citep{Saltelli_2008} because single-point application of local methods can identify dramatically different important and unimportant parameters in different parts of the parameter space, and results could mislead modelers and users of model results. Hybrid methods have been presented by \citet{Kucherenko_2009}, who used derivatives to obtain global average results, and \citet{Rakovec_2014}, who used derivatives to obtain a distribution of local results over parameter space.
+%=====================================================================================
+%=====================================================================================
+
+
+
+% Local vs. Global  (different from optimization)
+% "Global sensitivity analysis" (Cuckier et al., 1973)
+% Sampling
+% Sobol sequences
+% FAST (Fourier Amplitude Sensitivity Testing)
+% DREAM (Differential Evolution Adaptive Metropolis)  ????
+
+
+% AK: design of computer experiments - moved to subsection 1
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Design of Computer Experiments}
+%
+%The expression ``design of computer experiments'' refers to a collection of methods that have the primary purpose of extracting as much information as possible (e.g. trend data) from a problem's parameter space using only a limited number of sample points.  Some methods focus on sample points that are at the extremes of the parameter space, such as:  Central Composite Design, Box-Behnken Design, Full Factorial Design and Fractional Factorial Design, as a means of identifying trends.  Other methods use a collection of sample points that are ``space-filling'', with good coverage of the entire parameter space, such as: Orthogonal Array Designs, Latin Hypercube Sampling, Monte Carlo Sampling and Quasi Monte Carlo Sampling.
+
+%DAKOTA offers a variety of different methods for this type of analysis, including:
+%%
+%DDACE = Distributed Design and Analysis of Computer Experiments
+%\begin{itemize}
+%\item Central Composite Design (CCD, i.e. Box-Wilson)
+%\item Box-Behnken Design
+%\item Orthogonal Array (OA) Designs
+%\item Grid Design
+%\item Monte Carlo Design
+%\item Latin Hypercube Sampling (LHS) Design
+%\item OA-LHS Design (hybrid of OA and LHS above)
+%\end{itemize}
+%%
+%FSUDace
+%\begin{itemize}
+%\item Halton Quasi-Monte Carlo Sampling
+%\item Hammersley Quasi-Monte Carlo Sampling
+%\item Centroidal Voronoi Tessellation (CVT)
+%\end{itemize}
+%%
+%PSUADE MOAT
+%
+%See the DAKOTA documentation for detailed discussions of these methods.
+
+% AK: UNFORTUNATELY, THIS SECTION NEEDS TO GO FOR NOW.
+%%-------------------------------------------------------------------------------------------------------
+%%\section{Background: Key Concepts and Terms}
+%\section{Uncertainty Quantification in a component-based Modeling Framework}
+%\label{uncertainty}
+%
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Uncertainty Quantification for a stand-alone model}
+%\label{uncertainty.jacobian}
+%
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Propagation of Uncertainty through coupled models}
+%\label{uncertainty.modelcoupling}
+%
+
+
+%-------------------------------------------------------------------------------------------------------
+%\section{Background: Key Concepts and Terms}
+%\section{Background on Inverse Modeling Methods: Key Concepts and Terms}
+
+
+%=====================================================================================
+%=====================================================================================
+% AK: Renamed this section; I think this name is now appropriate. Also, moving Model Calibration etc upfront and limiting it to terminology.
+%% \section{Introduction to Inverse Modeling Methods}
+\section{Background:  Inverse Modeling Methods}
+\label{inverse_background}
+
+% \subsection{Inverse vs. Forward Modeling}
+
+{\it Forward modeling} simply refers to running a computational model for a {\it given} set of input
+variables and design parameters to generate output variables.
+% (which include {\it predictions}).
+{\it Inverse modeling} refers to efforts to invert this process, that is, to determine what a model's input
+variables and/or design parameters would need to be set to in order to generate a {\it given} set of output variables.
+In most cases, this inverse problem is {\it ill-posed}, meaning that there is not a unique set of input variables and
+design parameters that can produce a given output, but rather multiple sets.  However, {\it regularization methods}
+can be used to introduce additional criteria that discriminate between and preferentially select from these multiple sets.
+
+A forward model's performance can be quantified by defining a metric that measures the ``distance''
+between its output variables (or predictions or simulated data) and independent measurements
+(or observations).  Differences between corresponding observed and predicted values  are known as
+{\it residuals}, and this metric -- known as the {\it penalty, cost or objective function} (Section~\ref{inverse.objectivefn}) --
+is typically a function of the residuals, input variables and design parameters.
+Inverse modeling is concerned with how to make forward models perform as well as possible (model calibration),
+or with seeking the optimal input variables to predict observations to within measurement error.
+They therefore make use of {\it optimization methods} that seek
+%sets of
+%% input variables and
+%design parameters that
+to minimize an objective function, often subject to additional constraints.
+
+Earth surface process modelers range widely in their familiarity with and adoption of inverse modeling
+methodology.  For example, groundwater modelers have a long history of using inverse models, while
+sediment transport modelers do not.  Inclusion of these methods in modeling frameworks should
+encourage broader use of these methods.
+
+%The overall goodness of model fit is typically quantified by setting up a function of the residuals --- known as the
+%{\it penalty or objective function} (Section~\ref{inverse.objectivefn}) --- that measures the ``distance'' between
+%observed and predicted values.
+%%The overall goodness of model fit can also be quantified. This is typically done by setting up a function of the residuals, known as the {\it penalty or objective function} (Section~\ref{inverse.objectivefn}).
+%This allows the inverse problem to be treated with {\it optimization methods} that seek sets of input variables
+%and design parameters that minimize the objective function, often subject to additional constraints.\\
+%Typically, a model user is interested in minimizing the objective function by adjusting model inputs, subject to some
+%constraints. This procedure invokes the class of methods known as {\it inverse modeling}, to distinguish it from {\it forward
+%modeling}, which refers to running a computational model as described in Section~\ref{intro.model}.\\
+
+% REMOVED TO REDUCE WORD COUNT. SDP, 10/3/15
+%Inverse modeling
+%% is more commonly used
+%receives a greater emphasis
+%in some fields than others. Possible explanations include the widely varying ability, between disciplines, to measure important model inputs; differences in typical forward execution times (longer times can make inverse modeling more difficult); familiarity the modelers tend to have with optimizations methods, and so on. A powerful motivation for the use of inverse modeling methods comes from systems that cannot be observed directly, such as the deep Earth process models. Another important driver is the need to make accurate short-term predictions, such as in the weather and climate modeling communities.\\
+
+%===============================================================================
+% Removed by SDP for Jan 2016 resubmission
+%===============================================================================
+%Experience indicates that inverse modeling, and the somewhat related methods of sensitivity and uncertainty analysis, can serve as powerful tools for the Earth surface modeling community at large.
+%% This is because they
+%They allow the user to efficiently search for model design parameters that produce models with an objectively obtained best-fit to observations. This objectivity enables
+%%% , for example,
+%greater understanding of what characteristics of model development and
+%% integration with data
+%data integration
+%are likely to produce more accurate models.
+% REMOVED TO REDUCE WORD COUNT. SDP, 10/3/15
+% One goal of this article is to help modelers become familiar with the key concepts and terminology of inverse modeling.
+%===============================================================================
+%===============================================================================
+
+%This section reviews some basic concepts, terms and methods of {\it inverse modeling}.
+%As explained in the Introduction, inverse modeling requires the careful construction of {\it objective functions}
+%and relies on {\it optimization methods}.
+
+% AK: I started by naming it differently, but this just naturally got re-introduced. It loosely follows the proposal terminology narrative, but isn't identical.
+%===============================================================================
+% Removed by SDP for Jan 2016 resubmission
+%===============================================================================
+%\subsection{Key Concepts and Terms}
+%
+%%Inverse modeling employs a rich set of methods, which are used in a multidisciplinary manner.
+%% Here we attempt to clarify some key concepts and terms.
+%%  introduce some clarity below with regards to the disparate terminology, and the commonalities.\\
+%
+%The terms {\it inversion} and {\it model parameter estimation} (PE) are used interchangeably for the rich set of methods for determining model parameter values that produce the best match between observed and simulated values, as measured by an objective function (Section~\ref{inverse.objectivefn}).
+%This is sometimes described as ``fitting models to data''.
+%These methods use optimization techniques (Section~\ref{inverse.optimization}).
+%% I don't understand the use of "agnostic" here;  some techniques exploit the structure of the OF. (SDP, 1/17/15)
+%% which are agnostic of the structure of the objective function.
+%Before employing optimization, inversion and PE methods use the data error estimates and regularization terms to build a suitable objective function. PE tends to refer to problems with a small number of parameters, while inversion is traditionally concerned with large model parameter spaces (exceptions exist, of course). Prior information provides a mechanism for including independent information on parameters in inverse modeling. Forward models employed for inversion or PE can be distributed in three-dimensional space and may be transient.
+%
+%{\it Model calibration} is the process of modifying the parameter values and model construction to obtain a better fit to
+%observations.  As compared to  {\it model parameter estimation}, {\it model calibration} may be viewed as a broader
+%term that encompasses any model modifications that improve performance (not just adjustments to design parameters), 
+%such as modifying the basic physics, approximations, or numerical grid.
+
+%-------------------------------------------------------------------------------------------------------
+%\subsection{Data Assimilation (DA)}
+
+%======================================================================================
+% Removed by SDP for Jan 2016 resubmission
+%======================================================================================
+%{\it Data assimilation} is the process of incorporating observations into a transient numerical model with an objective of providing predictions. Operational data assimilation is used extensively in weather and space weather forecasting and ocean models, among other applications. {\it Variational data assimilation} minimizes a functional involving data misfit and regularization subject to satisfaction of the forward model, typically via gradient-based methods; functionals may be interpreted in a Bayesian context as the negative log posterior. Many system aspects, including initial conditions, can be varied. {\it Ensemble data assimilation} refers to many model runs using different parameter sets that are simulated as part of the progression.
+%======================================================================================
+%======================================================================================
+
+% {\bf It may be better to include sensitivity analysis in the section on uncertainty quantification.}
+
+% Moved up into Section 2.
+%Finally, closely related {\it sensitivity analysis} is used to identify what is important --- which observations are important to model parameters (and thus what parameters are informed by the observations), which model parameters are important to forecasts or predictions, and which observations are important to the forecasts or predictions. Note that model parameters can be defined to control many aspects of a system, including forcings, boundary conditions, and
+%characteristics distributed in space and/or time.
+% spatially and temporally distributed characteristics.
+
+
+%
+% AK: I figured this deserves a subsection, to more clearly distinguish between inversion and optimization.
+%-------------------------------------------------------------------------------------------------------
+\subsection{Constructing an Objective Function}
+% \subsection{Is a close model fit always good?}
+\label{inverse.objectivefn}
+% \label{inverse.regularization}
+
+%The first task in an inverse modeling problem is to construct an appropriate {\it objective function}.
+%This function must be 
+The {\it objective function} must be a {\it metric} that measures a forward model's performance, or the abstract ``distance''
+between observed and model-predicted or simulated values.  There are many different metrics that can be
+used, such as those based on the one-parameter family of $L^p$ norms, given by
+%
+\begin{linenomath*}
+\begin{equation}
+\label{Lp_metric}
+% d \left( \mathbf{x}^{(obs)}, \mathbf{x}^{(pred)}  \right) =
+\| \mathbf{y}^{(obs)} - \mathbf{y}^{(sim)}  \| =
+       \left( \sum_{k=1}^n  \left| y^{(obs)}_k - y^{(sim)}_k  \right|^p \right)^{1/p}
+\end{equation}
+\end{linenomath*}
+%
+where $\mathbf{y}$ is a vector with components $y_k$ and $p > 0$ is a scalar.  The case where $p=2$,
+or the $L^2$ norm, is the basis of the popular {\it least squares} metric.  While this metric gives
+disproportionate weight to outliers, it ensures that the derivative of the objective function is continuous
+where the error is zero.
+
+% REMOVED TO REDUCE WORD COUNT. SDP, 10/3/15
+%Section (\ref{long_profile_nls_problem}) provides a simple example of using the {\it nonlinear least squares}
+%or NLS method ($L^2$ norm)
+%to find the design parameters in an analytical model that provide the best fit to observed values
+%for the longitudinal elevation profile of a river.
+%The NLS method is also used in the discussion of Section~\ref{framework}.
+% We also discuss it more thoroughly for the general case in Section~\ref{framework}.
+
+While (\ref{Lp_metric}) provides a simple measure of model performance, it is well known in statistics that model
+fit can be too good.
+%===============================================================
+% Removed by SDP for Jan 2016 resubmission
+%===============================================================
+%In this case, the model reflects not just the results of valid processes, but also accommodates
+%data and model error so much that the predictive capability of the model is worse than that of a model that fits
+%less well. Recent work on this topic has been conducted by \citet{Doherty2010}, \citet{Foglia2013} and others.
+In inversion, we are therefore only interested in optimizing the objective function to within the data errors, and
+seek to avoid {\it overfitting} the data.
+% Added next line for Kelbert, 10/7/15
+To that effect, the general penalty function (1) is usually modified to scale the residuals by a data covariance.
+For examples, see \citet{Doherty2010} and \citet{Foglia2013}. 
+
+%The idea behind improving the fit to observations over what would be achieved using field data directly is that the better fit will produce better model predictive ability. However, this assumption has limits. It is well known in statistics that model fit can be too good. In this case, the model reflects not just the results of valid processes, but also accommodates data and model error so much that the predictive capability of the model is worse than that of a model that fits less well. Recent work on this topic has been conducted by \citet{Doherty2010}, \citet{Foglia2013}, and others.
+
+%In inversion, we are therefore only interested in optimizing the objective function to within the data errors, and seek
+%to avoid {\it overfitting} the data.
+As mentioned previously, many inverse problems are ill-posed, meaning that not one or several, but sometimes
+a subspace in the model parameter space will satisfy the measured data to within the measurement errors.
+In some domains, including hydrology \citep{Beven_and_Binley_1992,Beven_and_Freer_2001,Beven_2006},
+this problem is known as {\it equifinality}.
+We are thus typically interested in obtaining not just any solutions, but the smoothest among those that are
+satisfactory. 
+% Cut by SDP on 2/29/16 to reduce word count.
+%Often, we also need to preserve certain relationships between the model parameters.
+%For example, we might want to prevent sharp jumps between the model parameter values that correspond to
+%neighboring locations in space.
+We may also want the solution to be as close to our {\it a priori} knowledge
+about the model (or design) parameters, as possible, while still fitting the measured data.  Many of these
+objectives are obtained with a set of methods called {\it regularization}. Details of these methods are
+provided by
+%--------------------------
+\cite{Tikhonov63}, \cite{Parker84}, \cite{Hill_and_Tiedeman_2007} and \cite{Renard2011}.
+
+%=====================================================================================
+% Cut by SDP for Jan 2016 resubmission
+%=====================================================================================
+%There are two ways, almost equivalent, to implement regularization for an inverse problem in practice,
+%and both essentially involve including an additional {\it regularization term} in an objective function such as
+%(\ref{Lp_metric}). 
+%% (see Section~\ref{inverse.objectivefn}, and also Eq. (\ref{eq:least_squares}) for details).
+%% Equation~\ref{eq:least_squares}.
+%%The first method optimizes the objective function; then the extra term involving the model norm is a
+%%regularizing term in the traditional sense of~\cite{Tikhonov63}.
+%The first, and best-known method is called {\it Tikhonov regularization} ~\citep{Tikhonov63} and
+%adds a term that measures the ``distance'' between prior and estimated values of the design parameters,
+%which may include weighting factors.
+%%---------------------------------------------------
+%% From Mary's text (SDP, 1/19/14)
+%Prior information weighting is often error-based
+%\citep{Hill_and_Tiedeman_2007, Renard2011};
+%% \citep{Hill_and_Tiedeman_2007, Poeter2005, Renard2011};
+%% (Hill and Tiedeman, 2007; Poeter et al., 2005, 2014; Renard et al., 2011);
+%that is, it is based on an evaluation of measurement and model (epistemic) errors.
+%%---------------------------------------------------
+%The second is the approach of \cite{Parker84}, which minimizes an appropriate norm of the model parameters
+%subject to finding a model which fits the data to within a tolerance.
+%Minimizers of the penalty function such as~(\ref{Lp_metric}) in fact minimize the model norm
+%subject to the data misfit achieved. Minimizing with a range of $\lambda$ results in a range of data misfits;
+%choosing the one which achieves the appropriate misfit solves the problem for Parker's approach.
+%A third approach to regularization is to choose model parametrizations that reduce the number of
+%degrees of freedom in the model.
+%%Another angle of looking at the regularization needs to be mentioned: choosing model parametrizations
+%%to reduce the number of degrees of freedom also acts to regularize.
+%=====================================================================================
+%=====================================================================================
+
+%{\bf Now show metric with regularization term.}
+%%
+%\begin{equation}
+%S(x) = \sum_k  w \, (y_{obs} - y_{sim})^2 + \sum_j w_p \, (x_{prior} - x_{est})^2.
+%\label{eq:objectivefn}
+%\end{equation}
+%%
+%Here, $x$ is a vector of parameters, $w$ and $w_p$ are weight matrices that are diagonal in the absence of
+%correlated errors and full otherwise, $y_{obs}$ and $y_{sim}$ are observations and their related simulated values,
+%$x_{prior}$ and $x_{est}$ are the prior and estimated values of the parameters.  If the errors are Gaussian,
+%this objective function provides a rich statistical framework for detecting model bias and quantifying uncertainty.
+%This includes identifying non-Gaussian errors.
+
+
+%The objective function used in optimization may represent a cost, loss or penalty that is to be minimized, or some reward that is to be maximized.  Some problems require simultaneous optimization of multiple objective functions. Often an objective function is used to characterize the goodness of a particular design or solution that is being sought.  It may also be used as a metric (e.g. the sum of squared differences function) to measure the ``distance'' between observed and predicted, or actual and target values.  Optimization methods are therefore also required for model calibration, model fitting (e.g. curve and surface fitting), and inverse modeling.
+
+%In general, optimized functions used in inverse modeling are defined such that optimization produces a closer correspondence between observed and simulated values. However, when Bayesian methods are used, the fit to observations is penalized if the estimated parameter values stray from their a priori values.
+
+%While any optimization algorithm can be applied to a model calibration problem, nonlinear least squares methods use optimization algorithms that are especially designed for the case where the objective function is an $L_2$ norm, which involves a sum of the squares of the data residuals. This is a form of {\it penalty functional} which needs to be minimized (subject to the constraints in Section~\ref{inverse.regularization}) to obtain the best fitting model parameters. See Section (\ref{long_profile_nls_problem}) for a simplified $L_2$ norm example of finding the parameters in an analytical model that provides the best fit to observed values for the longitudinal elevation profile of a river. We also discuss it more thoroughly for the general case in Section~\ref{framework}.
+%%
+%\begin{equation}
+%S(x) = \sum_k  w \, (y_{obs} - y_{sim})^2 + \sum_j w_p \, (x_{prior} - x_{est})^2.
+%\label{eq:objectivefn}
+%\end{equation}
+%%
+%
+%Here, $x$ is a vector of parameters, $w$ and $w_p$ are weight matrices that are diagonal in the absence of
+%correlated errors and full otherwise, $y_{obs}$ and $y_{sim}$ are observations and their related simulated values,
+%$x_{prior}$ and $x_{est}$ are the prior and estimated values of the parameters.  If the errors are Gaussian,
+%this objective function provides a rich statistical framework for detecting model bias and quantifying uncertainty.
+%This includes identifying non-Gaussian errors.
+
+%\subsubsection{Nonlinear Least Squares Calibration}
+%
+%While any optimization algorithm can be applied to a model calibration problem, nonlinear least squares methods use optimization algorithms that are especially designed for the case where the objective function is a sum of the squares – often of differences between observed and predicted values.  See section (\ref{long_profile_nls_problem}) for an example of finding the parameters in a theoretical model that provide the best fit to observed values for the longitudinal elevation profile of a river.
+
+% REMOVED TO REDUCE WORD COUNT. (SDP, 10/3/15)
+%\subsubsection{Bayesian Calibration}
+%
+%An alternative method for constructing an objective function is based on Bayes Theorem and is used for
+%{\it Bayesian calibration}.  It uses observed data to compute a {\it likelihood function} which is then used as
+%an objective function to be maximized. 
+%For example, a one-parameter family of {\it probability density functions}, say $f(x; \alpha)$, is a set of
+%functions of $x$ that depend on a design parameter, $\alpha$.  However, if viewed as a function of $\alpha$
+%with $x$ fixed, it becomes a set of {\it likelihood functions}.
+
+% From Mary's text:
+%Bayesian methods are usually global (e.g., Markov-chain Monte Carlo; \citep{Vrugt2008}).
+%Vrugt et al, 2008).
+
+%-------------------------------------------------------------------------------------------------------
+\subsection{Optimization Methods}
+\label{inverse.optimization}
+
+Given an objective function, there are a variety of optimization methods for finding either its minima or maxima,
+as required.   Most of these can be classified as local and global (the others are hybrid).
+%Hybrid methods have been presented by Kucherenko et al. (2009), who used derivatives to obtain global average
+%results, and \citet{Rakovec2014}, who used derivatives to obtain a distribution of results over parameter space. 
+{\it Local methods} start somewhere in the design parameter space and then search in that vicinity for a local extrema
+--- the ``closest'' one to the starting point, in some sense.   Some local methods are gradient-based and some are
+gradient-free.  {\it Global methods} seek global extrema, and therefore have some way of looking (or sampling)
+everywhere, not just near a starting point.
+
+% Sen and Stoffa isn't in Bibtex file yet. (SDP)
+% global (Sen and Stoffa, 2013) and local (Hill and Tiedeman, 2007)
+
+% From Mary's text:
+%---------------------------
+%Optimization methods generally are divided into the categories global (Sen and Stoffa, 2013) and local
+%(Hill and Tiedeman, 2007). Commonly, global methods search for optimal solutions using sampling methods
+%and local methods use derivatives. Global methods ensure finding the global optimum within a defined
+%parameter space; local methods are generally much less computationally demanding but can be trapped
+%by local minima.
+
+% AK: Mary's text below
+%---------------------------
+%Local methods move toward the optimal value in a series of steps defined using derivatives evaluated at a series of points in parameter space. The small region of the objective function used to calculate each set of derivatives is what gives the local method its name. The derivatives may form a Jacobian matrix and/or a gradient vector. On the other hand, global methods require sampling techniques, often conducted in multiple chains. All methods require the ability to execute codes (accomplished through BMI in the CSDMS framework) to get simulated values to compare with observations derived from measured data. This process usually requires subsampling of model outputs. Most methods require calculation of an objective function, penalty functional, or a likelihood function, which may include misfit terms, regularization terms, and cross-gradient terms. Often observation and prior information weighting are assigned when observations of different types are considered. The latter are often error-based (Hill and Tiedeman, 2007; Poeter et al., 2005, 2014; Renard et al., 2011); that is, they are based on an evaluation of measurement and model (epistemic) errors. Multi-objective functions are critical when some of the objectives are based on cost and other priorities, and can be used to evaluate how different subsets of observations are emphasized (Gupta et al., 2012; Herman et al., 2013a,b; VanWerkhoven et al., 2008).
+
+% AK: These two more paragraphs are written by Mary that need rewording.
+%---------------------------
+%Sensitivity analysis methods are also divided into the categories of global and local (Borgonovo, 2006; Saltelli et al.,
+%2008; Hill and Tiedeman, 2007). Global methods use sampling, local methods use derivatives.
+%Global methods provide average results over a defined parameter space; local methods provide results
+%at a point in parameter space.  Hybrid methods have been presented by Kucherenko et al. (2009), who
+%used derivatives to obtain global average results, and Rakovec et al. (2014), who use derivatives to
+%obtain a distribution of local results over parameter space. Bayesian methods are usually global
+%(e.g., Markov-chain Monte Carlo; Vrugt et al, 2008). The number of forward model runs in global
+%methods based on sampling of the parameter space depends linearly on the number of model
+%parameters and becomes impractical for large model parameter spaces and models with run times that exceed even a few seconds.
+
+A classic optimization test problem is to find the (single) global minimum of the {\it Rosenbrock function}
+\citep{Rosenbrock_1960}:
+%% , given by
+%
+\begin{linenomath*}
+\begin{equation}
+f(p_1, p_2) = (a - p_1)^2 + b (p_2 - p_1^2)^2.
+\label{rosenbrock_equation}
+\end{equation}
+\end{linenomath*}
+%
+The second, quartic term is a valley-shaped surface that achieves its minimum value of zero along the parabola $p_2 = p_1^2$.
+Increasing the value of $b$ gives steeper valley walls and increases the difficulty of this optimization problem
+\citep{Lampton_1997}.
+The addition of the first term results in a function, $f$, with a single global minimum at the point $(p_1,p_2) = (a, a^2)$,
+where $f(p_1,p_2)=0$.  Typically one sets the constants to $a = 1$ and $b = 100$.
+Here, $p_1$ and $p_2$ are the model {\it design parameters} that are varied to improve the design of the model.
+
+This problem provides a good test of an optimization algorithm because the global minimum
+lies along the bottom of a narrow valley with steep walls and a very flat bottom.
+While it is easy for algorithms to find the valley, it is difficult to converge to the location of the global minimum
+within this valley.  The Rosenbrock function, shown in Figure 1, is used as an example in the DAKOTA package
+and provides context for our example problem to be examined in Section (\ref{long_profile_nls_problem}).
+
+%-----------------------------------------------
+% Figure 1.  Rosenbrock Function
+%-----------------------------------------------
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.9\textwidth]{figs/fig1-rosenbrock-function}
+	\caption{The Rosenbrock function, a classic test problem in optimization.}
+	\label{fig-rosenbrock-function}
+\end{figure}
+
+%-------------------------------------------------------------------------------------------------------
+\subsubsection{Derivative-Based Optimization}
+
+Derivative-based optimization algorithms require computing the gradient and/or Hessian of an objective function.   The gradient is the vector of first derivatives of the objective function with respect to each of the continuous {\it design parameters}, while the {\it Hessian} is a square matrix of the mixed second derivatives.
+%% It captures the local curvature of the objective function at each point in the parameter space.
+A {\it Jacobian} is a matrix of gradient vectors for multiple functions.  
+If $f(x_1,...,x_n)$ is the objective function of the design parameters, the gradient and Hessian matrix are
+% Figure~2.
+% Figure~\ref{fig2-hessian-matrix}.
+%
+\begin{equation}
+\nabla f =
+\begin{bmatrix}[1.5]
+{\partial f \over \partial x_1} \\
+{\partial f \over \partial x_2} \\
+\vdots \\
+{\partial f \over \partial x_n}
+\end{bmatrix},
+\qquad
+H(f) =
+\begin{bmatrix}[1.5]
+{\partial^2 f \over \partial x_1^2} & {\partial^2 f \over \partial x_1 \partial x_2}  & \cdots & {\partial^2 f \over \partial x_1 \partial x_n} \\  
+{\partial^2 f \over \partial x_2 \partial x_1} & {\partial^2 f \over \partial x_2^2 } & \cdots & {\partial^2 f \over \partial x_2 \partial x_n} \\  
+\vdots & \vdots & \ddots & \vdots \\
+{\partial^2 f \over \partial x_n \partial x_1} & {\partial^2 f \over \partial x_n \partial x_2 } & \cdots & {\partial^2 f \over \partial x_n^2}
+\end{bmatrix}.
+\end{equation}
+%
+%\begin{center}
+%{\footnotesize Figure 2. Gradient vector and Hessian matrix.}
+%% {\footnotesize Figure 2. Hessian matrix.}  % (just right)
+%% {\scriptsize Figure 2. Hessian matrix.}  % (too small)
+%% {\small Figure 2. Hessian matrix.}         % (too big)
+%\end{center}
+% $$     
+% \end{equation}
+%
+%-----------------------------------------------
+% Figure 2.  Hessian Matrix
+%-----------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.5\textwidth]{fig2-hessian-matrix}
+%	\caption{Hessian matrix.}
+%	\label{fig2-hessian-matrix}
+%\end{figure}
+%
+Derivative-based methods include:  Gradient Descent, Conjugate Gradient, Sequential Quadratic
+Programming (SQP) and Newton Methods and Method of Feasible Directions (MFD)
+(DAKOTA includes multiple variants of these and more.).  All derivative-based methods require repeated derivative
+evaluations at (typically) at least several dozens to several hundreds points in the model parameter space.
+They are best suited to finding local minima near initial guesses.  \\
+
+Many models of physical processes are based on mathematical functions that have continuous first and second derivatives.  In addition, many optimization problems can be formulated in terms of cost (or penalty) functions that have continuous first and second derivatives.  For these types of models, it is often possible to find local extrema (stationary points) of the function using standard methods of calculus, i.e. by determining locations where derivatives are equal to zero. 
+(See Section~\ref{long_profile_nls_problem}.)
+A second derivative test can then be used to determine whether a minimum or maximum occurs at that location.
+% See Section~\ref{long_profile_nls_problem} for a simple example.
+For these analytic models, the derivative can be computed by {\it symbolic differentiation}
+and model code can be written to return the resulting functions evaluated at required points in the parameter space.
+However, this situation is less common in practical geoscience applications.\\
+
+%For computational models which do not have an analytic derivative of simulated data with respect to the model
+%design parameters,
+For computational models which do not provide analytic derivatives of their output variables with respect to the
+design parameters,
+local or global numerical approximations are required.  A global numerical approximation could
+be constructed if the design parameter space is small enough.
+%that it can be explored in sufficient detail by sampling methods
+%% (Section~\ref{uncertainty_background})
+%that curve-fitting is a viable option.
+The more common
+alternative for practical problems is brute force {\it numerical differentiation}.  To compute the derivative of the
+objective function by numerical differentiation, each of the model design parameters, $x_i$, is, in turn, slightly
+perturbed around its local value.  The objective function is evaluated for the unperturbed and the perturbed
+parameter, and the difference is taken to estimate one entry in the gradient vector.  The number of forward
+model runs to compute the gradient vector at a point with this method is thus $(N_m + 1)$,
+where $N_m$ is the number of design parameters and becomes impractical for large parameter spaces.\\
+
+The third type of differentiation is distinct from the first two classical types and is usually called {\it automatic differentiation}.  It exploits the fact that every computer program, no matter how complicated, performs calculations by combining elementary arithmetic operations (addition, subtraction, multiplication, division, powers, etc.) with evaluations of elementary functions (exp, log, sin, cos, etc.).  By applying the chain rule to this sequence of operations it is possible to automatically compute derivatives of arbitrary order that are accurate to the machine's working precision while using only several times more operations than the original program.
+Many such tools have now reached maturity (e.g., OpenAD, \citet{Utke_et_al_2014_OpenAD}; see \url{http://www.autodiff.org/} for a comprehensive list).
+With automatic differentiation, the cost of computing
+the gradient vector
+% a single derivative
+varies, but typically takes as much time as several (e.g. $2$ to $12$) forward model runs, which could be a great
+improvement over numerical differentiation for large model parameter spaces.\\
+
+Finally, the {\it adjoint state method} \citep{Errico_1997} is available for computing the gradients at the cost of $2$ model runs,
+% (for each iteration of the inversion)
+by making clever use of certain symmetries in computational model formulations. This method requires writing an alternative {\it adjoint model}, which is similar to the forward model and typically has very similar or identical physics, except for certain sign conventions. However, various convergence complications may arise making the writing of the adjoint code a somewhat nontrivial task. Once the adjoint code exists, it may be used for repeated, extremely efficient, and accurate derivative calculations.
+% (see Section~\ref{framework} for details).
+
+% AK: This is actually quite misleading - I wouldn't put it this way; easier to comment out for now than to reword.
+%Note that most Earth system models ({\bf forward models} in particular) compute their output variables without utilizing an objective function and therefore have not been written to be able to return the derivatives of their variables.  In order to use gradient-based optimization algorithms with such models, additional software components/utilities of some kind will therefore be required that can compute the required derivatives, hopefully in a way that is noninvasive and does not require major changes to the models themselves. By contrast, {\bf inverse models} usually specify an objective function and are therefore usually able to provide  estimates of its derivatives.
+
+%-------------------------------------------------------------------------------------------------------
+\subsubsection{Derivative-Free Optimization}
+
+Derivative-free methods do not require computing derivatives of the objective function and can therefore be used for a larger class of optimization problems where continuous derivatives may not exist (including problems with discrete parameters).  These methods can be classified as either {\it local} or {\it global}.  {\it Local methods} use a variety of different algorithms for searching the parameter space for optimal solutions and for refining or focusing the search in the vicinity of good solutions to find better solutions.  Examples include: Pattern Search methods (e.g. Asynchronous Parallel Pattern Search, COLINY Pattern Search and Mesh Adaptive Search), Simplex methods (e.g. Parallel Direct Search, COBYLA and Nelder-Mead) and Greedy Search Heuristic (e.g. Solis-Wets method).  {\it Global methods} simultaneously search across the entire parameter space.
+Examples include:  Evolutionary Algorithms (EA) which are based on concepts from Darwin's Theory of Evolution and concepts from genetics such as natural selection, reproduction, mutation, crossover, inheritance and recombination
+% (e.g. coliny\textunderscore ea, soga and moga in DAKOTA)
+and Division of RECTangles (DIRECT).
+% (e.g. ncsu\textunderscore direct and coliny\textunderscore direct in DAKOTA.)
+Implementations of these and other derivative-free methods are also available and documented within DAKOTA.
+
+{\it Population-based optimization} is an important class of gradient-free optimization methods.
+Examples include:  Genetic Algorithms (e.g. from the larger class of Evolutionary Algorithms), Memetic Algorithms
+(based on the concept of {\it memes}, which combine an evolutionary or population-based algorithm with individual
+learning or local improvement procedures), Swarm Algorithms (e.g. Ant Colony Optimization, Particle Swarm Optimization,
+Intelligent Water Drops), Harmony Search, Cuckoo Search and Differential Evolution.
+
+%=====================================================================================
+% Cut by SDP for Jan 2016 resubmission
+%=====================================================================================
+%Other types of optimization include:  Simulated Annealing, Random Search, Direct Search, Grid Search and IOSO (Indirect Optimization based on Self-Organization).
+%% Wikipedia has good articles for most of the optimization methods mentioned in this paper.
+
+%=====================================================================================
+%=====================================================================================
+
+
+%%-------------------------------------------------------------------------------------------------------
+%\subsubsection{Population-based Optimization}
+%
+%Examples include:  Genetic Algorithms (e.g. from the larger class of Evolutionary Algorithms), Memetic Algorithms
+%(based on the concept of {\bf memes}, which combine an evolutionary or population-based algorithm with individual
+%learning or local improvement procedures), Swarm Algorithms (e.g. Ant Colony Optimization, Particle Swarm Optimization,
+%Intelligent Water Drops), Harmony Search, Cuckoo Search and Differential Evolution.
+%
+%%-------------------------------------------------------------------------------------------------------
+%\subsubsection{Other Optimization Methods}
+%
+%Examples include:  Simulated Annealing, Random Search, Direct Search, Grid Search and IOSO (Indirect Optimization based on Self-Organization).
+
+
+% AK: Model Calibration subsection is moved to earlier in this section, and restructured
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Model Calibration}
+%
+%Model calibration is the process of adjusting a model's design parameters in an effort to find those that provide
+%the best fit to data.  Optimization methods are often used, where the objective function measures the discrepancy
+%between sets of observed and model-predicted values.
+%%This objective function in this case provides a measure (or metric) of the discrepancy between sets of observed and model-predicted values.
+%Calibration can be used for both forward and inverse models.
+%
+%\subsubsection{Nonlinear Least Squares Calibration}
+%
+%While any optimization algorithm can be applied to a model calibration problem, nonlinear least squares methods use optimization algorithms that are especially designed for the case where the objective function is a sum of the squares – often of differences between observed and predicted values.  See section (\ref{long_profile_nls_problem}) for an example of finding the parameters in a theoretical model that provide the best fit to observed values for the longitudinal elevation profile of a river.
+%
+%\subsubsection{Bayesian Calibration}
+%
+%This method is based on Bayes Theorem and uses observed data to compute a {\it likelihood function}.
+%This then plays the role of an objective function to be maximized.
+%A one-parameter family of {\it probability density functions}, say $f(x; \alpha)$, is a set of functions of $x$ that
+%depend on a design parameter, $\alpha$.  However, if viewed as a function of $\alpha$ with $x$ fixed,
+%it becomes a set of {\it likelihood functions}.
+
+
+% Moved here from Section 5.  Merge in, with citations.
+%-------------------------------------------------------------------------------------------------------
+%\subsection{Terminology}
+%
+%{\bf NOTE:  Some of this terminology was already explained in the Background section, so this section
+%needs to be edited and condensed.  Or perhaps we could move some of this into the Background section?}
+%\\
+%
+%The terms in inverse modeling are often poorly understood. Here we provide definitions (in italics) issues in a way that emphasizes the utility of our proposed work.
+%
+%{\it \bf Penalty functional, cost function, objective function}: a function of predicted and observed data which provides a measure of how close the prediction gets to the observables. Typically, we strive to minimize this function. The terms will be used interchangeably.
+%
+%{\it \bf Uncertainty quantification}: determine ranges within which simulated values could vary without contradicting knowledge about observations, prior information, and known system characteristics too much. Environmental modeling is often used to predict effects of future anthropogenic and/or natural occurrences. Predictions are always uncertain. Epistemic and aleatory prediction uncertainty is caused by data errors and scarcity, parameter uncertainty, model structure uncertainty, and scenario uncertainty (Morgan and Henrion, 1990; Neuman and Wierenga, 2003; Meyer et al., 2007; Renard et al., 2011; Clark et al., 2011). Data errors and scarcity, as well as other issues, can be addressed using Bootstrap methods (e.g., Davison and Hinkley, 1999). Parameter uncertainties are commonly propagated into measures of prediction uncertainty using two measures: individual confidence intervals based on classical regression theories (Draper and Smith, 1998; inclusion of prior information in regression theories is discussed by Hill and Tiedeman, 2007, among others) and individual credible intervals based on Bayesian theories (Box and Tiao, 1992; Casella and Berger, 2002; Lu et al., 2012). Computational cost varies widely by method; for example, high-dimensional non-Gaussian inversion may be intractable unless exploitable structure such as Petra et al (2014) is found. Model structure uncertainty can be addressed using alternative models (e.g., Foglia et al., 2013). The methods of concern in this proposal address issues related to inverse modeling, including data errors, parameter estimation and uncertainty, uncertainty propagation, and sensitivity analysis used to identify sources of uncertainty and how it might be reduced. These methods are fundamental to evaluation of the other types of errors, as suggested, for example, by Foglia et al. (2013) for model structure uncertainty, and to evaluation of risk (Tartakovsky, 2013). Thus, the efforts described here are broadly applicable in efforts to understand and quantify prediction uncertainty.
+%
+%{\it \bf Sensitivity analysis}: Use to identify what is important - which observations are important to parameters (and thus what parameters are informed by the observations), which parameters are important to forecasts or predictions, and which observations are important to the forecasts or predictions. Limiting this definition to parameters is not necessarily very restrictive because parameters can be defined to control many aspects of a system, including forcings, boundary conditions, and spatially and temporally distributed characteristics. Discrete characteristics can be analyzed, for example, through multiple model technology
+%
+%{\it \bf Model calibration}: The process of modifying the parameter values and model construction to obtain a better fit to observations, i.e., to minimize the penalty functional. Is a close model fit always good? The idea behind improving the fit to observations over what would be achieved using field data directly is that the better fit will produce better model predictive ability. However, this assumption has limits. It is well known in statistics that model fit can be too good. In this case, the model reflects not just the results of valid processes, but also accommodates data and model error so much that the predictive capability of the model is worse than that of a model that fits less well. Recent work on this topic has been conducted by Doherty and Welter (2010), Foglia et al. (2013), and others.
+%
+%{\it \bf Inversion, Optimization, Parameter estimation (PE)}: determining parameter values that produce the best match between observed and simulated values, as measured by an objective function. Optimization is agnostic of the structure of the objective function, while inversion and PE methods use the data error estimates and regularization terms to build an objective function. PE tends to refer to problems with small number of parameters, which inversion is traditionally concerned with large model parameter spaces (exceptions, of course, exist). Prior information provides a mechanism for including independent information on parameters in the inverse modeling. Models can be distributed in three dimensional space and can be transient.
+
+% AK: Moved to earlier in the section.
+%%-------------------------------------------------------------------------------------------------------
+%\subsection{Data Assimilation (DA)}
+%
+%This is the process of incorporating observations into a transient numerical model with an objective of providing predictions. Operational data assimilation is used extensively in weather and space weather forecasting and ocean models, among other applications. {\it \bf Variational data assimilation}: Minimize a functional involving data misfit and regularization subject to satisfaction of the forward model, typically via gradient-based methods; functionals may be interpreted in a Bayesian context as the negative log posterior. Many system aspects, including initial conditions, can be varied. {\it \bf Ensemble data assimilation}: Many model runs using different parameter sets are simulated as part of the progression.
+
+%-------------------------------------------------------------------------------------------------------
+%\subsection{Other Important Concepts}
+%
+%There are many other important concepts in the realm of uncertainty quantification that are beyond the scope of this document.  Since detailed discussions can easily be found online (e.g. see the section called Direct Links to Wikipedia Articles below), here we simply list some of the most important ones.
+%%
+%\begin{itemize}
+%\item Accuracy vs. Precision
+%\item Aleatoric (Statistical) vs. Epistemic (Systematic) Uncertainty
+%\item Data assimilation
+%\item Decision theory
+%\item Equifinality (Beven, 2001, 2006)
+%\item Estimation theory
+%\item Fuzzy logic
+%\item Lesson of Geocentric (Ptolemaic) vs. Heliocentric (Copernican) models
+%\item Parametric vs. Non-parametric (or Distribution-free) methods
+%\item Response surface methodology
+%\item Risk, reliability and failure analysis
+%\end{itemize}
+%%
+
+%% Whole Section Moved to Introduction & Rewritten (AK, 1/14/15)
+%%-------------------------------------------------------------------------------------------------------
+%\section{Uncertainty Quantification for Models}
+%
+%% Moved to Introduction  (SDP, 1/11/15)
+%%-------------------------------------------------------
+%%\subsection{What is a Model?}
+%%
+%%There are many possible definitions of the word {\it model}.  This paper is concerned with {\it computational models}
+%%that predict the evolution of one or more system state variables over time as a function of observations at a given
+%%start time.  These predictions are made using a set of equations which express laws of physics and other constraints
+%%on the problem of interest.  Laws of physics are often expressed as differential equations that include a time derivative,
+%%and computational models use a discretization of space and time and some combination of {\it numerical methods} to
+%%solve the governing set of equations to produce predictions for future times.  A key characteristic of this type of model
+%%is that it requires one or more {\it input variables} (observations) which it uses to compute a set of {\it output variables}
+%%(predictions).  A {\it data set} can also be viewed as a source of ``output variables'', but it lacks any input variables.
+
+% Moved up to Background Section 2
+%----------------------------------------------------
+%\subsection{Terminology}
+%
+%{\bf NOTE:  Some of this terminology was already explained in the Background section, so this section
+%needs to be edited and condensed.  Or perhaps we could move some of this into the Background section?}
+%\\
+%
+%The terms in inverse modeling are often poorly understood. Here we provide definitions (in italics) issues in a way that emphasizes the utility of our proposed work.
+%
+%{\it \bf Penalty functional, cost function, objective function}: a function of predicted and observed data which provides a measure of how close the prediction gets to the observables. Typically, we strive to minimize this function. The terms will be used interchangeably.
+%
+%{\it \bf Uncertainty quantification}: determine ranges within which simulated values could vary without contradicting knowledge about observations, prior information, and known system characteristics too much. Environmental modeling is often used to predict effects of future anthropogenic and/or natural occurrences. Predictions are always uncertain. Epistemic and aleatory prediction uncertainty is caused by data errors and scarcity, parameter uncertainty, model structure uncertainty, and scenario uncertainty (Morgan and Henrion, 1990; Neuman and Wierenga, 2003; Meyer et al., 2007; Renard et al., 2011; Clark et al., 2011). Data errors and scarcity, as well as other issues, can be addressed using Bootstrap methods (e.g., Davison and Hinkley, 1999). Parameter uncertainties are commonly propagated into measures of prediction uncertainty using two measures: individual confidence intervals based on classical regression theories (Draper and Smith, 1998; inclusion of prior information in regression theories is discussed by Hill and Tiedeman, 2007, among others) and individual credible intervals based on Bayesian theories (Box and Tiao, 1992; Casella and Berger, 2002; Lu et al., 2012). Computational cost varies widely by method; for example, high-dimensional non-Gaussian inversion may be intractable unless exploitable structure such as Petra et al (2014) is found. Model structure uncertainty can be addressed using alternative models (e.g., Foglia et al., 2013). The methods of concern in this proposal address issues related to inverse modeling, including data errors, parameter estimation and uncertainty, uncertainty propagation, and sensitivity analysis used to identify sources of uncertainty and how it might be reduced. These methods are fundamental to evaluation of the other types of errors, as suggested, for example, by Foglia et al. (2013) for model structure uncertainty, and to evaluation of risk (Tartakovsky, 2013). Thus, the efforts described here are broadly applicable in efforts to understand and quantify prediction uncertainty.
+%
+%{\it \bf Sensitivity analysis}: Use to identify what is important - which observations are important to parameters (and thus what parameters are informed by the observations), which parameters are important to forecasts or predictions, and which observations are important to the forecasts or predictions. Limiting this definition to parameters is not necessarily very restrictive because parameters can be defined to control many aspects of a system, including forcings, boundary conditions, and spatially and temporally distributed characteristics. Discrete characteristics can be analyzed, for example, through multiple model technology
+%
+%{\it \bf Model calibration}: The process of modifying the parameter values and model construction to obtain a better fit to observations, i.e., to minimize the penalty functional. Is a close model fit always good? The idea behind improving the fit to observations over what would be achieved using field data directly is that the better fit will produce better model predictive ability. However, this assumption has limits. It is well known in statistics that model fit can be too good. In this case, the model reflects not just the results of valid processes, but also accommodates data and model error so much that the predictive capability of the model is worse than that of a model that fits less well. Recent work on this topic has been conducted by Doherty and Welter (2010), Foglia et al. (2013), and others.
+%
+%{\it \bf Inversion, Optimization, Parameter estimation (PE)}: determining parameter values that produce the best match between observed and simulated values, as measured by an objective function. Optimization is agnostic of the structure of the objective function, while inversion and PE methods use the data error estimates and regularization terms to build an objective function. PE tends to refer to problems with small number of parameters, which inversion is traditionally concerned with large model parameter spaces (exceptions, of course, exist). Prior information provides a mechanism for including independent information on parameters in the inverse modeling. Models can be distributed in three dimensional space and can be transient.
+%
+%{\it \bf Data assimilation (DA)}: A process of incorporating observations into a transient numerical model with an objective of providing predictions. Operational data assimilation is used extensively in weather and space weather forecasting and ocean models, among other applications. {\it \bf Variational data assimilation}: Minimize a functional involving data misfit and regularization subject to satisfaction of the forward model, typically via gradient-based methods; functionals may be interpreted in a Bayesian context as the negative log posterior. Many system aspects, including initial conditions, can be varied. {\it \bf Ensemble data assimilation}: Many model runs using different parameter sets are simulated as part of the progression.
+
+%-------------------------------------------------------------------------------------------------------
+\section{General-Purpose Software Packages for Inverse Modeling and Uncertainty Quantification}
+% and Sensitivity Analysis}
+\label{tools}
+
+%-------------------------------------------------------------------------------------------------------
+% \subsection{Inverse Modeling and Uncertainty Quantification Toolkits}
+
+There is a rich foundation in the area of inverse modeling and uncertainty quantification that could potentially be
+incorporated into a component-based modeling framework.
+%This section provides a listing of some available tools.
+% and a short discussion of existing data assimilation frameworks. 
+%Just as model coupling frameworks provide interoperability for process-based models, they could also provide access to model analysis programs such as these. Such an environment encourages dramatically greatly software usability and reuse, and more mature software.
+%Access to as many general-purpose tools as possible would be beneficial to expose modelers to evolving methods
+%in this fast-moving field. 
+Each of the software packages listed here
+% for parameter estimation, general-purpose optimization, and uncertainty quantification
+is easy to obtain (many are open-source)
+% open-source  %%%% (are they really open-source ?)
+and provide a rich collection of methods.
+
+\begin{itemize}
+\item DAKOTA, 2015 (Design Analysis Kit for Optimization and Terascale Applications)
+\url{http://dakota.sandia.gov/software.html}
+\item UCODE / Jupiter API, 2015 (Joint Universal Parameter IdenTification and Evaluation of Reliability,
+\citep{Poeter_et_al_2014}) \\
+\url{http://igwmc.mines.edu/freeware/ucode/}
+%% \url{http://water.usgs.gov/software/JupiterApi/}
+\item PSUADE, 2014 (Problem Solving environment for Uncertainty Analysis and Design Exploration,
+\citep{PSUADE}) \\
+\url{http://computation.llnl.gov/casc/uncertainty_quantification/}
+\item PEST, 2015 (Model-Independent Parameter Estimation and Uncertainty Analysis)
+\url{http://www.pesthomepage.org/Home.php}
+\item Ostrich, 2008 (Optimization Software Toolkit)\\
+\url{http://www.civil.uwaterloo.ca/lsmatott/Ostrich/OstrichMain.html}
+\item TAO, 2014 (Toolkit for Advanced Optimization), with a focus on gradient-based search methods \\
+\url{http://www.mcs.anl.gov/research/projects/tao/}
+\item QUESO, 2014 (Quantification of Uncertainty for Estimation, Simulation and Optimization)\\
+\url{https://red.ices.utexas.edu/projects/software/wiki/QUESO}
+\item STEPS, 2012 (Stochastic Engine for Pathway Simulation)\\
+\url{http://steps.sourceforge.net/STEPS/default.php}
+\end{itemize}
+
+
+%%In the same way that 
+%Just as model coupling frameworks provide interoperability for process-based models, they could also provide access to model analysis programs such as these. Such an environment encourages dramatically greatly software usability and reuse, and more mature software.\\
+
+Fortunately, there is a fairly standard mechanism that inverse modeling or uncertainty analysis applications use to
+interact with process models, such as those in CSDMS, as illustrated in Figure~\ref{fig2-inverse-modeling-flowchart}. 
+%The mechanics of how one of these inverse modeling or uncertainty analysis applications typically interact with a process
+%model, such as those in CSDMS, is illustrated in Figure~\ref{fig2-inverse-modeling-flowchart}.
+After the user selects and configures an analysis method, the application generates the input data needed for that
+method, saves it to the model's configuration file (using a blank template), and runs the model repeatedly with different inputs.
+After each model run, a post-processing script scrapes results from the model's output files, which may include
+evaluation of a cost function or its derivatives, and uses these results to perform the analysis.  In a modeling framework,
+the model to be analyzed may be a composition of many separate but connected component models.
+%% REMOVED TO REDUCE WORD COUNT: SDP, 10/7/15
+%Figure~\ref{fig2-inverse-modeling-flowchart} is deceptively simple; the power and long-term value of this approach lies
+%in the ability to include
+%% completely novel
+%innovative joint inversion capabilities, as will likely be motivated through challenges posed by the complex coupled
+%models that can be analyzed because of this work.  See Section~\ref{framework} for details of how that might be achieved.\\
+	
+%The basic functionality of any of the inverse modeling tools is illustrated in Figure~\ref{fig2-inverse-modeling-flowchart}. The figure is deceptively simple; the power and long-term value of this approach lies in the ability to include completely novel joint inversion capabilities, as will likely be motivated through challenges posed by the complex coupled models that can be analyzed because of this work.  See Section~\ref{framework} for details of how that might be achieved.\\
+
+% AK: Moving the block of text below all the way up to the section about penalty functionals.
+%
+%The analyses conducted can be quite varied. For example, local methods may include calculation of a Jacobian matrix and/or a gradient vector, while global methods require sampling techniques, often in multiple chains. All methods require the ability to execute codes (accomplished through BMI in CSDMS framework) to get simulated values to compare with observations derived from measured data. This process usually requires subsampling of model outputs. Most methods require calculation of an objective function, penalty functional, or a likelihood function, which may include misfit terms, regularization terms, and cross-gradient terms (see Section~\ref{inverse_background} for discussion and and overview of these terms). Often observation and prior information weighting are assigned when observations of different types are considered. The latter are often error-based (Hill and Tiedeman, 2007; Poeter et al., 2005, 2014; Renard et al., 2011); that is, they are based on an evaluation of measurement and model (epistemic) errors. Multi-objective functions are critical when some of the objectives are based on cost and other priorities, and can be used to evaluate how different subsets of observations are emphasized (Gupta et al., 2012; Herman et al., 2013a,b; VanWerkhoven et al., 2008).
+
+Many of these general-purpose toolkits are implemented as Python packages, or C++/Fortran libraries, to streamline
+integration with computational models; some others would be harder to integrate. Each has unique features.
+% Various Python packages are also available for uncertainty quantification, such as: {\it uncertainty, soerp and mcerp}.
+Python packages for uncertainty quantification include: {\it uncertainty, soerp and mcerp}.
+(See \url{http://pythonhosted.org/uncertainties/} for more information.)
+
+
+%
+%-------------------------------------------------------------------------------------
+% Figure 2.  Inverse modeling flowchart
+%-------------------------------------------------------------------------------------
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{figs/fig2-inverse-modeling-flowchart_v3}
+	\caption{Flowchart showing how an inverse modeling or uncertainty analysis application
+	such as DAKOTA or UCODE (represented by blue and white boxes) typically interacts with a process model,
+	such as those in CSDMS (red boxes).  Modified from \citet{banta2008building}.}
+%	After the user selects and configures an analysis method, the application
+%	generates the input data needed for that method, saves it to the model's configuration file (using a template), and
+%	runs the model repeatedly with different inputs.  After each model run, a post-processing script scrapes results
+%	from the model's output files, which may include evaluation of a cost function or its derivatives, and uses these
+%	results to perform the analysis.  In a modeling framework, the model to be analyzed may be a composition of
+%	many separate but connected component models.}
+	%Other inverse modeling applications could be similar or have features removed, added, or reorganized.
+	% (Modified from Banta et al., 2008).}
+	\label{fig2-inverse-modeling-flowchart}
+\end{figure}
+%
+
+%=======================================================================================
+% Cut by SDP for Jan 2016 resubmission
+%=======================================================================================
+%\subsection{Data Assimilation Frameworks}
+%
+%For problems that require system evolution in time, and particularly predictive capabilities, ensemble data assimilation methods are available in NCAR DART (Data Assimilation Research Testbed), PDAF (Parallel Data Assimilation Framework), SANGOMA (Stochastic Assimilation for the Next Generation Ocean Model Applications) and OpenDA (OpenDA Data Assimilation Toolbox); the latter also includes variational methods.\\
+%
+%Even though general-purpose optimization and data assimilation toolboxes tend to refer to themselves as
+%``frameworks'', the word is quite overloaded with meaning. In particular, the tools described above do not
+%include functional models, data, or HPC computing.  Instead, they are stand-alone tools that have strict
+%interface rules and are, in that sense, frameworks. Below, we list a few examples of complete
+%{\it data assimilation frameworks}.  These are complete, functional modeling systems, each
+%serving a certain broad Earth science domain, with certain inversion capabilities.  Indeed, in starting a
+%complex endeavor such as augmenting a modeling framework with data assimilation capabilities, it is
+%wise to review and learn from these existing frameworks.
+%
+%\begin{itemize}
+%\item Advanced Simulation Capability for Environmental Management (ASCEM) is a DOE-EM software project that serves to address waste storage and environmental cleanup challenges.
+%\item NASA's Land Data Assimilation System (LDAS) based on NASA's Land Information System (LIS), and its European counterpart European Land Data Assimilation System (ELDAS), serve the land surface community.
+%\item The Consortium for Data Assimilative Modeling (HYCOM), and the operational Real-Time Ocean Forecast System (RTOFS) at NOAA serve oceanographers,
+%\item USGS Coastal Storm Modeling System (CoSMoS, 2014), and the operational forecasting by the European Ocean Monitoring and Forecasting Service (MyOcean, 2014) serve coastal forecasting.
+%\item A proprietary uncertainty and parameter estimation system, iTOUGH2, is applicable to problems in hydrology, hydrogeophysics, and structural geology.
+%\item MIT's Seismic Imaging Toolbox for Python (PySIT, 2014), the Toolbox for Applied Seismic Tomography (TOAST, 2014), and the recent GeoScale project at ETH Zurich, and the Python package simpeg.xyz (SIMPEG, 2014) serve certain subdomains of geophysics.
+%\item Integrated Forecasting System (IFS) at the European Centre for Medium-Range Weather Forecasts (ECMWF, 2014), and others, serve climate.
+%\end{itemize}
+%%
+
+%=======================================================================================
+%=======================================================================================
+%A number of complete data assimilation frameworks exists that each serve a specific, although broad, modeling domain. Maintaining compatibility with the other frameworks is one of our important goals, and to that end we are currently developing the Framework Definition Language (FDL) through a different NSF's EarthCube funded project called the Earth System Bridge.
+%We intend to explore compatibility and potentially leverage the efforts with the Advanced Simulation Capability for Environmental Management (ASCEM) project team (see letter of collaboration). ASCEM is a DOE-EM software project developing next-generation, science-based reactive flow and transport simulation capabilities and supporting modeling toolsets within a HPC framework to address waste storage and environmental cleanup challenges. This is a comprehensive framework has a rich set of tools for uncertainty quantification, parameters estimation, risk assessment, and decision support.
+%
+%In the land surface community, NASA's Land Data Assimilation System (LDAS) based on NASA's Land Information System (LIS), is currently the only available data assimilation framework. Two distinct systems are operational, one spanning the North American continent at high resolution (NLDAS), the other global (GLDAS). LIS enables running of multiple land surface models, with different configuration options such as different spatial and temporal resolutions, choices of input forcing data, data assimilation, and coupled modeling. The data assimilation currently runs with a handful of land surface models (Mosaic, CLM2, Noah, VIC). LIS only includes global inverse and uncertainty analysis methods (Harrison et al., 2012). LDAS, and the related European Land Data Assimilation System (ELDAS), could potentially provide valuable components to leverage our proposed efforts.
+%
+%The ocean modeling community has a long tradition of data assimilation, encapsulated by the Global Ocean Data Assimilation Experiment (GODAE) – a multi-year, multi-agency, international initiative, and it’s modern extensions [JPL/MIT/AER’s ECCO group (ECCO, 2014), the Consortium for Data Assimilative Modeling (HYCOM), and the operational Real-Time Ocean Forecast System (RTOFS) at NOAA]. ECCO’s Ocean General Circulation Model (MITgcm) is available through CSDMS, and together with its multiple tangent linear and adjoint versions (ECCO-SIO, ECCO-GODAE, ECCO-Production, OCCA, GECCO, etc) could form a natural component in our development. Other examples of ocean data assimilation framework are the USGS Coastal Storm Modeling System (CoSMoS, 2014), and the operational forecasting by the European Ocean Monitoring and Forecasting Service (MyOcean, 2014) employing SANGOMA.
+%
+%A proprietary uncertainty and parameter estimation system called iTOUGH2 originates at the DOE Lawrence Berkeley National Lab. Setup in a modular framework, it is applicable to a wide range of problems involving hydrology, hydrogeophysics, and structural geology (Finsterle and Zhang, 2011; Commer et al, 2014; Wellmann et al, 2014). Open source inversion framework efforts for geophysical problems include MIT’s Seismic Imaging Toolbox for Python (PySIT, 2014), the Toolbox for Applied Seismic Tomography (TOAST, 2014), and the recent GeoScale project at ETH Zurich. An open sources inversion framework in geophysics is simpeg.xyz (REF). Another commercial example of a multidisciplinary inversion framework is AIMMS.
+%
+%In the atmospheric and climate research communities, operational data assimilation frameworks are a necessity. An example is the Integrated Forecasting System (IFS) at the European Centre for Medium-Range Weather Forecasts (ECMWF, 2014).
+
+%=======================================================================================
+%=======================================================================================
+% \section{Optimization Test Problem:  Finding Best Fits to Longitudinal Elevation Profiles}
+\section{Example Problem:  Finding Best Fits to Longitudinal Elevation Profiles}
+\label{long_profile_nls_problem}
+
+%The purpose of this section is to 
+We now illustrate a small part of what a toolkit such as DAKOTA has to offer,
+using a type of problem that will be familiar to many earth surface process modelers.  This particular
+problem  --- which at first glance appears to be quite simple --- actually represents a nontrivial
+optimization problem (similar to the Rosenbrock problem in Section {\ref{inverse.optimization}})
+that requires more sophisticated optimization algorithms.
+%The well-known and fairly robust Levenberg-Marquardt (LM) algorithm \citep{More_1977} ---
+%which combines the benefits of the gradient descent and Gauss-Newton methods ---  fails
+%to converge for one of the model functions used here, even after 1000 iterations with a
+%tolerance of $10^{-4}$.  The LM algorithm is used by or available in most curve-fitting packages
+%such as Microsoft Excel, IDL (Interactive Data Language) as LMFIT, and MatLab as an option for
+%{\it lsqnonlin}.
+
+\citet{Peckham_2015} reviews three different physics-based derivations that predict a particular
+functional form for the longitudinal elevation profiles of rivers (i.e. elevation as a function of distance
+downstream from a drainage divide). These are concave-up functions that are steep near the
+drainage divide or ridgetop, but which rapidly flatten out with increasing distance downstream.
+The functions contain parameters that relate to the physics of the problem, but which are not
+easily measured.  For this example, two different models will be considered.   The first, 
+derived by \citet{Whipple_Tucker_1999}, can be written as:
+%
+\begin{linenomath*}
+\begin{equation}
+z(x) = z_0 - (c/p) \left( x^p - x_0^p \right), \quad p \ne 0.
+\label{whipple_function}
+\end{equation}
+\end{linenomath*}
+%
+While this looks simple, the parameters $p$ and $c$ are actually functions of eight other
+physical and geometric parameters. 
+% which seems to pose an additional problem for gradient-based optimization algorithms.
+The design or fitting parameters for this model are $c$ and $p$, and  $z(x_0) = z_0$
+for any values of $c$ and $p$.  Here, $z_0$ is the elevation at a distance $x_0$ from the
+ridgetop, and we typically take $x_0 = 0$.   However, this model has an unrealistic and infinite
+slope at $x = x_0$ when $x_0 = 0$.
+A second model, derived by  \citet{Peckham_2015}, predicts that
+%
+\begin{linenomath*}
+\begin{equation}
+z(x) = z_0 + {1 \over p_\gamma R^\star}
+     \left\{ S_0^{\gamma + 1} - \left[ S_0^\gamma + R^\star \left( x - x_0 \right) \right]^{p_\gamma} \right\}.
+\label{peckham_function}
+\end{equation}
+\end{linenomath*}
+%
+Here, $p_\gamma = (\gamma + 1)/\gamma$, and the design parameters are
+$\gamma$ (an exponent in a slope-discharge formula) and
+$R^\star$ (a rescaled, geomorphically effective rainrate).
+This function includes $S_0$, the measured, finite slope at $x_0$, and has $ |z'(x_0)| = S_0$.
+The theoretical value of $\gamma$ typically lies between $-1$ and $0$.  If we treat $S_0$ as
+given by direct observation, then both models have two design parameters.
+% For this function, the slope at $x_0$, $S_0 = |z'(x_0)|$, is always finite.
+
+For this example, both models are compared to observational data for the main channel of Beaver Creek,
+Kentucky, as measured by RiverTools \citep{Peckham_2009_RT}
+from a digital elevation model with a grid-spacing of $10$ meters.
+This data set consists of $2426$ $(x_k, z_k)$ pairs, with $x_0 = 0.0$, $z_0 = 668.33$ (meters),
+and $S_0 = 0.461$.  A nonlinear, least-squares cost function was constructed from the residuals using the
+$L^2$ norm;  see (\ref{Lp_metric}) and Appendix A.  While most optimization algorithms can
+find the best-fit parameters for the second model, the first model leads to a nontrivial 
+optimization problem.
+% similar to the Rosenbrock problem.
+For example, we tried the well-known Levenberg-Marquardt (LM) algorithm \citep{More_1977} ---
+a robust and adaptive algorithm which combines the benefits of the gradient descent and Gauss-Newton
+methods, and which is able to solve the Rosenbrock problem.
+We tried the implementation of the LM algorithm in IDL (Interactive Data Language) called LMFIT,
+and the one in MatLab, provided as an option for {\it lsqnonlin}.  Both could get close but failed
+to converge for this model, even after 5000 double-precision iterations with a tolerance of $10^{-4}$,
+and even when starting near the best-fit values. 
+% There appears to be a local minima near the global minimum.
+The LM algorithm is used by or available in many other curve-fitting packages, including Microsoft Excel.
+
+A new mathematical treatment of this nonlinear least squares problem is given in Appendix A,
+for a class of models that includes (\ref{whipple_function}) as a special case.
+It  allows the best-fit $c$ and $p$ to be computed quickly and reliably and provides a way to
+evaluate the results from the various algorithms.
+%These results are shown in Table 1.
+% where $\epsilon$ is the corresponding value of the cost function.
+%
+%\begin{table}
+%    \begin{center}
+%    \caption{Best-fit parameters for Beaver Creek main profile data with $x_0 > 0$.}
+%    \smallskip
+%    \label{table1}
+%    \begin{tabular}{l | c | c | c}
+%    $z_0 - z(x_k) =$ & $p_0$ & $c_0$ & $\epsilon$ \\
+%    \hline
+%    % $c  \left( x_k^p - x_0^p \right)$                  &  $0.133$  &  $-110.14$ \\
+%    % $(c/p) \left( x_k^p - x_0^p \right)$              &  $0.133$  &  $-14.67$ \\
+%    $c  \left( x_k^p - x_0^p \right)$                  &  $-0.059$  &  $-1549.30$  &  $8.5$ \\
+%    $(c/p) \left( x_k^p - x_0^p \right)$              &  $-0.059$  &  $91.34$      &  $8.5$ \\
+%    $c \left[ \log^p(x_k) - \log^p(x_0) \right]$   &  $0.609$   &  $208.29$    & $9.0$ \\
+%    \end{tabular}
+%    \end{center}
+%\end{table}
+%
+%\begin{table}
+%    \begin{center}
+%    \caption{Best-fit parameters for Beaver Creek main profile data.}
+%    \smallskip
+%    \label{table2}
+%    \begin{tabular}{l | c | c | c}
+%    $z_0 - z(x_k) =$ & $p_0$ & $c_0$ & $\epsilon$ \\
+%    \hline
+%    $c  \left( x_k^p - x_0^p \right)$                  &  $0.133$  &  $110.14$  &  $783.97$ \\
+%    % $15.9$  \\
+%    $(c/p) \left( x_k^p - x_0^p \right)$              &  $0.133$  &  $14.67$   &  $783.97$ \\
+%    % $15.9$  \\
+%    % $c \left[ \log^p(x_k) - \log^p(x_0) \right]$   &  $0.609$   &  $-208.29$   & $9.0$  \\
+%    \end{tabular}
+%    \end{center}
+%\end{table}
+%%
+Tables 1 and 2 show the best-fit parameters to the Beaver Creek data set for the two profile models
+as computed by the method in Appendix A and by several optimization algorithms in DAKOTA.
+The corresponding input files and DAKOTA configuration files are available on GitHub
+(github.com/mcflugen/peckham\_et\_al\_2016).
+The NL2SOL routine uses a generalization of the Levenberg-Marquardt algorithm,
+% mentioned previously,
+but converges for both models.
+
+For the Whipple-Tucker model, the analytic gradient with respect to $p$ contains terms
+with $x^p \ln(x)$, which approach $0$ as $x$ goes to zero for $p>0$.
+This initially caused problems until the analytic gradient function was modified accordingly.
+It was also found that all methods were sensitive to the value of $x_0$ --- perturbing $x_0$
+from $0$ to a small value such $0.01$ resulted in significantly different best-fit parameters.
+%
+\begin{table}
+    \begin{center}
+    \caption{Best-fit parameters for the Whipple-Tucker (1999) model to the Beaver Creek main profile data.}
+    \smallskip
+    \label{table1}
+    \begin{tabular}{l | c | c | c}
+    Optimization Method (DAKOTA or theory)& $p_0$ & $c_0$ & $R^2$ \\
+    \hline
+    Method in Appendix A  & $0.133$ & $14.68$ & $0.90$ \\
+    NL2SOL (analytic gradients) & $0.133$ & $14.68$ & $0.90$ \\
+    NL2SOL (numeric gradients) & $0.133$ & $14.68$ & $0.90$ \\
+    OPT++ Gauss-Newton (analytic gradients) & $0.133$ & $14.68$ & $0.90$ \\
+    OPT++ Gauss-Newton (numeric gradients) & $0.133$ & $14.68$ & $0.90$ \\
+    Pattern Search (no gradients) & $0.133$ & $14.68$ & $0.90$ \\
+    Evolutionary Algorithm (no gradients) & $0.130$ & $14.82$ & $0.90$ \\
+    \end{tabular}
+    \end{center}
+\end{table}
+% \vspace*{-2mm}  %%%%%%%%%%%%%%%%
+%\vspace*{-\baselineskip}
+%
+\begin{table}
+    \begin{center}
+    \caption{Best-fit parameters for the Peckham (2015) model to the Beaver Creek main profile data.}
+    \smallskip
+    \label{table2}
+    \begin{tabular}{l | c | c | c}
+    Optimization Method (DAKOTA) & $\gamma$ & $R^\star$  & $R^2$ \\
+    \hline
+    LMFIT in IDL (analytic gradients) & $-0.701$ & $0.0035$   &  $0.99$ \\
+    NL2SOL (analytic gradients) & $-0.701$ & $0.0035$  & $0.99$ \\
+    NL2SOL (numeric gradients) & $-0.702$ & $0.0035$  & $0.99$ \\
+    OPT++ Gauss-Newton (analytic gradients) & $-0.701$  & $0.0035$ & $0.99$ \\
+    OPT++ Gauss-Newton (numeric gradients) & $-0.702$  & $0.0035$ & $0.99$ \\
+    Pattern Search (no gradients) & $-0.741$ & $0.0041$  & $0.99$\\
+    Evolutionary Algorithm (no gradients) & $-0.678$ & $0.0031$  & $0.99$ \\
+    \end{tabular}
+    \end{center}
+\end{table}
+% \vspace*{-2mm}  %%%%%%%%%%%%%%%%
+%
+%\begin{table}
+%    \begin{center}
+%    \caption{Best-fit parameters for the Whipple-Tucker model to the Beaver Creek main profile data
+%   (with $x_0 = 0$).}
+%    \smallskip
+%    \label{table1}
+%    \begin{tabular}{l | c | c | c}
+%    DAKOTA Method & $p_0$ & $c_0$ & $\epsilon$ \\
+%    \hline
+%    NL2SOL (analytic gradients) & $0.571$ & $0.580$ & $5770.$ \\
+%    NL2SOL (numeric gradients) & $0.081$ & $23.9$ & $687.$ \\
+%    OPT++ Gauss-Newton (analytic gradients) & $0.632$ & $4.04$ & $234000$ \\
+%    OPT++ Gauss-Newton (numeric gradients) & $0.081$ & $23.9$ & $687.$ \\
+%    Pattern Search (no gradients) & $0.081$ & $23.9$ & $687.$ \\
+%    Evolutionary Algorithm (no gradients) & $0.080$ & $24.0$ & $687.$ \\
+%    \end{tabular}
+%    \end{center}
+%\end{table}
+%%
+%\begin{table}
+%    \begin{center}
+%    \caption{Best-fit parameters for the Peckham model to the Beaver Creek main profile data
+%    (with $x_0 = 0$).}
+%    \smallskip
+%    \label{table2}
+%    \begin{tabular}{l | c | c | c | c}
+%    DAKOTA Method & $\gamma$ & $R^\star$  & $S_0$ & $\epsilon$ \\
+%    \hline
+%    NL2SOL (numeric gradients) & $-.772$ & $0.0053$ &  $0.684$ & $141.$ \\
+%    OPT++ Gauss-Newton (numeric gradients) & $-.773$ & $0.0053$  & $684.$ & $141$ \\
+%    Pattern Search (no gradients) & $-.75$ & $0.0048$  & $.633$ & $149.$\\
+%    Evolutionary Algorithm (no gradients) & $-.83$ & $0.0075$  & $.942$ & $242$ \\
+%    \end{tabular}
+%    \end{center}
+%\end{table}
+%
+Figure (\ref{fig3-whipple-profile-fit}) shows the best fit of (\ref{whipple_function})
+%(\ref{power_curve})
+to the Beaver Creek profile data, obtained with the NL2SOL method in DAKOTA. 
+Figure (\ref{fig4-peckham-profile-fit}) shows the best fit of (\ref{peckham_function})
+to the same profile data, obtained with the NL2SOL method in DAKOTA.
+
+%Figure (\ref{fig-power-profile-dakota}) shows the best fit of (\ref{whipple_function})
+%%(\ref{power_curve})
+%to the Beaver Creek profile data, obtained with the NL2SOL method in DAKOTA. 
+%Figure (\ref{fig-peckham-profile-dakota}) shows the best fit of (\ref{peckham_function})
+%to the same profile data, obtained with the NL2SOL method in DAKOTA.
+
+%
+% Figure (\ref{fig-logp-profile-dakota}) shows the best fit for $f(p,x) = \log^p(x)$
+%(\ref{power_curve})
+% to the Beaver Creek profile data, obtained with the XX method in DAKOTA.
+%
+%----------------------------------------------------------------------------------
+% Figure.  Fit to main channel elevation profile, Beaver Creek
+% (power profile, DAKOTA)
+%----------------------------------------------------------------------------------
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{figs/fig3-whipple-profile-fit}
+	\caption{Best fit of Whipple-Tucker (1999) model to Beaver Creek main channel profile,
+	using NL2SOL algorithm in DAKOTA.}
+	\label{fig3-whipple-profile-fit}
+\end{figure}
+%
+%----------------------------------------------------------------------------------
+% Figure.  Fit to main channel elevation profile, Beaver Creek
+% (logp profile, DAKOTA)
+%----------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.8\textwidth]{fig-logp-profile-dakota}
+%	\caption{Best fit for $f(p,x) = \log^p(x)$ to main channel profile, Beaver Creek, using
+%	XXXX algorithm in DAKOTA.}
+%	% obtained with DAKOTA}
+%	\label{fig-logp-profile-dakota}
+%\end{figure}
+%
+%----------------------------------------------------------------------------------
+% Figure.  Fit to main channel elevation profile, Beaver Creek
+% (peckham profile, DAKOTA)
+%----------------------------------------------------------------------------------
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{figs/fig4-peckham-profile-fit}
+	\caption{Best fit of Peckham (2015) model to Beaver Creek main channel profile,
+	using NL2SOL algorithm in DAKOTA.}
+	\label{fig4-peckham-profile-fit}
+\end{figure}
+
+
+%%---------------------------------------------------------------------------------
+%% Figure.  Fit to main channel elevation profile, Beaver Creek
+%% (Peckham profile, RT)
+%%----------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.9\textwidth]{fig5-main-profile-beaver}
+%	\caption{Best fit of another theoretical power-law function to main channel
+%     profile, Beaver Creek, obtained with RiverTools.}
+%	\label{fig5-main-profile-beaver}
+%\end{figure}
+%%
+%Figure (\ref{fig5-main-profile-beaver}) shows the best fit of another theoretical curve
+%(Peckham, 2014) to actual elevation profile data points for the main channel of Beaver
+%Creek, Kentucky.
+
+
+%=======================================================================================
+% \subsection{Model Validation and Sources of Error}
+\section{Sources of Model Error and How Modeling Frameworks Can Help Reduce Them}
+\label{sources_of_model_uncertainty}
+
+% SDP: This is redundant and the next sentence makes a stronger opening line.
+%---------------------------------------
+%In an attempt to produce accurate predictions, computational models are validated. This can be achieved
+%by comparing the model outputs against measured data, as well as against the outputs of other models.
+
+%==================================================================
+% Moved & modified by SDP for Jan 2016 resubmission
+%==================================================================
+%When a computational model fails to accurately reproduce the observations for output variables of interest, or
+%produce an accurate prediction, multiple issues could be at play.  Often, the physical, chemical, or biological processes in the model are not represented correctly, or the code is used outside of its range of validity. Sometimes a bug in the code or a user error are at the root of the problem. Note, however, that even if the mathematics and physics of a model were perfect, perfect predictions would not be possible because input data (e.g. initial conditions over the model domain) will always be imperfectly known and incomplete.  For example, for spatial models, surrogates for actual measurements across the model domain based on remotely sensed imagery are often the best available data for initial conditions (e.g. soil moisture or rainfall rates).
+%==================================================================
+% Removed by SDP for Jan 2016 resubmission
+%==================================================================
+% Uncertainties of input data and other model configuration parameters are also a source of error.
+% and much of this manuscript is concerned with methods that are used to quantify this effect.
+% The section with label "uncertainty" was removed; don't need this:  SDP, 1/17/15
+% (Sections~\ref{uncertainty_background} and~\ref{uncertainty}).
+
+In addition to helping quantify model uncertainty, modeling frameworks can also be augmented to help reduce
+some, but not all sources of model error.  To better understand this point, it is helpful to first consider various
+sources of error in some detail. 
+%Some sources of model error can be addressed by modeling frameworks
+%A modeling framework can help to reduce some, but not all sources of model error.
+%For the purpose of designing a modeling framework that can help to reduce model uncertainty, it is helpful to
+%classify sources of error to identify features that could be added to the framework.
+%We suggest that these are best
+Sources of error can be classified into four main categories, namely (1) model inadequacy, (2) input data inadequacy, (3) model parameter and input data uncertainty and (4) developer and user errors.
+%==================================================================
+% Removed by SDP for Jan 2016 resubmission
+%==================================================================
+%Before we get to uncertainty quantification methods, which provide a rich tool set for addressing category (3), we first briefly review some other common sources of error in a geoscience computational model.
+
+\subsection{Model Inadequacy}
+
+%\textbf{AK: rearranged; I am leaving the checklists in, but we might want to tighten this up}
+
+Models may be inadequate for their intended purpose for a variety of reasons, such as
+\begin{itemize}
+\item Lack of knowledge of the true, underlying physics.  For example, it was impossible to explain the
+observed precession of the planet Mercury using classical (Newtonian) mechanics, but it was finally
+explained in 1916 by Einstein's more complete theory of general relativity (curvature of space-time near the Sun.)
+This lack of knowledge was responsible for what has been called an {\it unknown unknown}.
+\item Neglected effects or simplifying assumptions (e.g. air resistance)
+\item Numerical method and approximation problems  (convergence, stability, consistency, fidelity, etc.)
+\item Model coupling problems (e.g. feedbacks, conservation problems)
+\end{itemize}
+
+% This no longer fits:  SDP, 1/17/15.
+%A ``bias'' can be viewed as a possible characteristic or property of model error or uncertainty.  This is the tendency to consistently over- or under-predict and may be due to a neglected effect (e.g. air resistance), an approximation that takes the form of an inequality, the numerical method used to solve a differential equation, or many other causes.
+	
+The main ways to reduce uncertainty due to model inadequacy are: (1) scientific research to better understand physical
+processes and systems that are poorly understood, (2) careful selection of numerical methods and (3) various forms
+of testing.  As for testing, there are five main things that models can be tested or evaluated against, namely:
+% in order to reduce uncertainty due to {\it model inadequacy}, namely:
+%
+\begin{itemize}
+\item Analytic solutions and test problems
+\item Measured data (i.e. observed vs. predicted)
+\item Valid range or reasonableness (e.g. sanity tests)
+\item Other models (especially for complex models, e.g. climate models)
+\item Their former selves (e.g. regression and unit tests, often automated)
+\end{itemize}
+%
+It is straightforward to build this type of testing into a modeling framework, and CSDMS has
+already started to build a collection of analytic solutions and test data sets for this purpose.  In addition, modeling
+frameworks result in models being used by large groups of people, which leads to them becoming more reliable
+and robust, particularly when their source code is open.
+
+\subsection{Input Data Inadequacy}
+	
+Inadequate input data is another key source of model error.
+Note, that even if the mathematics and physics of a model were perfect, perfect predictions would not be possible because
+input data (e.g. initial conditions over the model domain) will always be imperfectly known and incomplete.  For example,
+for spatial models, surrogates for actual measurements across the model domain based on remotely sensed imagery are
+often the best available data for initial conditions (e.g. soil moisture or rainfall rates).
+Issues include:
+\begin{itemize}
+%\item Difficulty in making measurements - removed by AK: this causes poor resolution or poor quality which are mentioned below
+\item Poor spatial or temporal resolution
+\item Poor quality
+\item Storage or transfer errors (e.g. byte order, data type, truncated files, formatting, etc.)
+\end{itemize}
+
+The main ways to reduce this type of uncertainty are: (1) better data collection methodologies and (2) careful data
+preparation and documentation (with provenance metadata).  Modeling frameworks provide an ideal platform for
+guiding users through input data preparation steps, checking it for errors, displaying documentation and managing
+metadata.  As with models, data sets become more reliable and robust when they are used by large groups of people.
+
+\subsection{Model Parameter and Input Data Uncertainties}
+
+This category includes model calibration problems, which arise when the model design parameters are not set to their optimal (or even reasonable) values.
+%To this category belong the model calibration problems, arising when the model design parameters are not set at their optimal (or even reasonable) values.
+%
+Measurement or observation error in input data can also result in biased or incorrect simulated data or model
+predictions (a phenomenon known as {\it aleatoric uncertainty}).  DAKOTA and similar toolkits can provide
+modeling frameworks with powerful tools for assessing and quantifying this source of uncertainty.
+
+%
+%============================================================================
+% Removed by SDP for Jan 2016 resubmission
+%============================================================================
+%Section~\ref{uncertainty_background} discusses the methods of Uncertainty Quantification and Propagation of Error, which provide a powerful set of tools for assessing and quantifying this source of uncertainty.
+
+\subsection{Developer and User Errors}
+
+%\textbf{AK: rearranged; I am leaving the checklists in, but we might want to tighten this up}
+
+\begin{itemize}
+\item Incorrect implementation or developer error (e.g. bugs)
+	\begin{itemize}
+	\item Regressions (bugs due to updates or improvements)
+	\item Bugs may be in software dependencies or in model itself.
+	\item Coordinate projection, sign convention, or units mismatch (and failure to convert)
+	\item Problems at domain boundaries
+	\end{itemize}
+%
+\item Preparation of input data (model setup)
+\item Incorrect or unintended use (e.g. unawareness of limitations)
+\end{itemize}
+
+Developer error can be reduced through a variety of best software development practices, such as various types of testing (see above), version control, use of design principles such as {\it separation of concerns}, use of standards and frequent use. User errors can be addressed in a variety of ways, including:
+%
+\begin{itemize}
+\item Documentation (e.g. tech tips, FAQs, manuals, tutorials, context help)
+\item GUIs (that can restrict possible inputs based on context)
+\item Software to check inputs, conditions, compatibility, etc.
+\item Training (and certification)
+\item Supervision by an expert
+\end{itemize}
+%
+Most of these strategies would be straightforward to implement within a modeling framework.
+%Modeling frameworks can also help reduce these types of errors by implementing several of the
+%strategies outlined above.
+
+%=========================================================================
+% Removed by SDP for Jan 2016 resubmission
+%=========================================================================
+%A ``checklist'' approach can be used to completely eliminate some sources of error.  Checklists help to ensure consistency and completeness in carrying out a complex task.  They can be used within software, by a developer or by a user.  Well-known examples of checklists that are used to reduce uncertainty (and improve safety and reliability) include the pilot's pre-flight checklist, motorcyclist pre-ride checklist, surgical safety checklist used by the World Health Organization, and multiple industrial procedure checklists.
+
+%=========================================================================
+%=========================================================================
+
+%
+%\begin{itemize}
+%\item pilot's pre-flight checklist
+%\item motorcyclist pre-ride checklist
+%\item surgical safety checklist (developed by Dr. Atul Gawande for World Health Organization.)
+%\item industrial procedure checklists
+%\end{itemize}
+%
+
+%-------------------------------------------------------------------------------------------------------
+% Input variables tend to be given measurements that are not to be varied, while design parameters are settings
+% that define a given model and which can be varied to improve the model's predictions.
+
+%=======================================================================================
+% \eject
+\section{Including Inverse Modeling and Uncertainty Quantification in a Component-Based Modeling Framework}
+\label{framework_inclusion}
+
+Inclusion of uncertainly quantification, parameter estimation and inversion tools in a modeling framework inevitably requires a certain compromise on efficiency, but has the potential to democratize these techniques, providing Earth system modelers with fingertip access to  model validation approaches, without the typically steep learning curve and software development requirements. Here however, we aim to show that in a smart framework, this efficiency compromise may not be a significant drawback. For this, we consider several common use case scenarios, illustrated in Figure~(\ref{fig-model-coupling}).
+
+%-------------------------------------------------------------------------------------
+% Figures X,Y,Z.  Model coupling
+%-------------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.95\textwidth]{fig5a-standalone-model}
+%	\caption{Stand alone computational model in a model coupling framework.}
+%	\label{fig-a-standalone-model}
+%\end{figure}
+%%
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.95\textwidth]{fig5b-series-coupling}
+%	\caption{Model coupling in series.}
+%	\label{fig-b-series-coupling}
+%\end{figure}
+%%
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.95\textwidth]{fig5c-parallel-coupling}
+%	\caption{Model coupling in parallel.}
+%	\label{fig-c-parallel-coupling}
+%\end{figure}
+%%
+\begin{figure}
+     \begin{center}
+        \subfigure[Stand alone computational model in a model coupling framework.]{
+            \includegraphics[width=0.90\textwidth]{figs/fig5a-standalone-model}
+	    %% \label{fig5a-standalone-model}
+            }\\
+        \subfigure[Model coupling in series.]{
+            \includegraphics[width=0.90\textwidth]{figs/fig5b-series-coupling}
+            %% \label{fig5b-series-coupling}
+            }\\
+        \subfigure[Model coupling in parallel.]{
+            \includegraphics[width=0.90\textwidth]{figs/fig5c-parallel-coupling}
+            %% \label{fig5c-parallel-coupling}
+            }
+    \end{center}
+\caption{Model coupling configurations in a component-based framework.}
+%% a) Stand alone computational model in a model coupling framework. b) Model coupling in series. c) Model coupling in parallel.}
+\label{fig-model-coupling}
+\end{figure}
+%%
+%-------------------------------------------------------------------------------------------------------
+\subsection{Stand-alone Models}
+
+In a modeling framework with access to ``uncertainty tools'',  
+% A stand-alone computational model included into such a model coupling framework
+a stand-alone computational model 
+could immediately make use of external parameter estimation tools based on derivative-free optimization (Section~3.3.2). Derivative-based optimization methods (Section~3.3.1) could also be directly employed, using numerical differentiation to iteratively compute derivatives of the
+%% penalty functional.
+penalty function.
+However, both types of methods are only applicable for models that have relatively few significant input model parameters that are free to vary.  For models with a large model parameter space, adjoint techniques must be employed to compute
+%%% penalty functional
+penalty function
+derivatives for derivative-based optimization (see more details on the adjoints in Section~3.3.1), and to compute the data sensitivities (or the full Jacobian) needed by the uncertainly quantification techniques. These adjoint codes are most efficient if hand-coded, and the model developer could provide an adjoint for the system to use, if such a tool already exists. They would then immediately enjoy the full variety of techniques available in the framework, while sacrificing little on the efficiency. For models that do not have an adjoint, the use of automatic differentiation could be considered. (It should be noted that an adjoint version of every generic interpolation routine supported by the framework would also need to be provided to enable this functionality.) Thus, the methods described here could be beneficial to model developers who are interested in using and/or testing out a variety of inversion techniques with minimal additional development investment.
+However, the true value of the framework-based approach to inversion becomes evident when inversion and/or parameter estimation for coupled models is considered. We now discuss two distinct use cases.
+
+%-------------------------------------------------------------------------------------------------------
+\subsection{Models Coupled in Series}
+
+This happens when the output of a numerical model A provides input to a different numerical model B. The output of model B may then be directly compared with measured data. The user may be interested in calibrating the input parameters of model A to better match observations. For example, a lithospheric deformation code could be coupled to a landscape evolution code, which could in turn be validated by surface topography.
+
+In this scenario, the model coupling framework will essentially bundle the sequence of models into one for the purposes of an external model calibration or inversion tool. For derivative-based optimization techniques, the derivative of the penalty function with respect to the input parameters to the model sequence would be obtained by chain rule, specifically applying the adjoint of model B to the data residuals, and the adjoint of model A to the results of the adjoint on model B to obtain the complete derivative of the penalty function. For simpler models, brute-force derivative multiplication would be performed. All of these options would be handled at the framework level, making it possible to streamline complicated model validation and calibration scenarios.
+
+%-------------------------------------------------------------------------------------------------------
+\subsection{Models Coupled in Parallel}
+
+A very different model coupling setup occurs when a single set of parameters is input to more than one computational model. In this case, models A and B have the same inputs, but they predict different variables, and are validated by different data. The goal is then to use all data jointly to obtain the best matching set of input parameters. Such is, for example, the problem of joint inversion in geophysics: parameters such as temperature, pressure, presence of melt, chemical impurities, and water content are the true parameters of interest. These may be used to compute the indirectly observed Earth parameters, such as seismic velocities or electrical conductivity, which are in turn used to compute the predicted observables at the Earth's surface. A joint inversion would use both seismic and electromagnetic measurements to constrain the Earth's structure. In general, this problem involves both series and parallel model coupling.
+
+In the parallel model coupling scenario, the adjoint would be obtained by applying the two model adjoints, separately, to their respective data residuals, and the resultant variations in the input model parameters would be summed up to obtain the complete penalty function derivative. Again, this would be handled at the framework level, allowing the complicated model coupling scenario to be wrapped up for direct use in an external inversion routine.
+
+%-------------------------------------------------------------------------------------------------------
+\subsection{New Modeling Framework Functionality}
+
+%In this brief discussion, we consider numerical models that compute their variable of interest on a certain numerical grid. CSDMS and similar frameworks already have tools to convert between grids for model coupling, and they already gather the grid-related information from the model. To compare grid-based model predictions with measured data --- the first stage of model validation --- these capabilities would need to be extended further to allow for careful and robust interpolation of these predictions to a point in space and time, at which the real data measurements are taken.
+%% REMOVED TO REDUCE WORD COUNT: SDP, 10/7/15
+%Given these capabilities, a
+%%% penalty functional
+%penalty function
+%such as equation (\ref{Lp_metric})
+%% Eq.~\ref{Lp_metric}
+%may be computed by the framework to assess how well a given model prediction approximates reality at a particular location.
+%% REMOVED TO REDUCE WORD COUNT: SDP, 10/7/15
+%For ``perfect'' data, the goal would be to minimize this
+%%% penalty functional
+%penalty function
+%over the model parameters.  Model calibration and inverse modeling methods include standard techniques for taking data measurement errors into account, by scaling with a data covariance matrix and avoiding data overfit.
+
+%To support model uncertainty analysis, a modeling framework would need to be extended with the following key functionality.
+%% The augmented framework would therefore need the following additional key functionality.
+%It would need to be able to interpolate in space and time to observation locations, to compute data residuals and to provide a range of penalty functions to work with. It would need to be able to store the parameters and data for each model, and to perform addition and component-wise multiplication in the model parameter space. Finally, for a chosen numerical model, it should be able to numerically compute the derivative of the penalty function, or to run the adjoint if provided. The latter would entail a call to apply the adjoint code to the weighted data residuals, which in essence implements multiplication by transposed Jacobian to obtain a perturbation of the model parameters, without a direct computation or storage of the Jacobian matrix.
+
+%=================================================================================
+
+%To support model uncertainty analysis, a modeling framework would need to be able to:
+%% be extended with the following key functionality.
+%% The augmented framework would therefore need the following additional key functionality.
+%% It would need to be able to:
+%(1) store the parameters and data for each model,
+%(2) interpolate in space and time to provide predictions at observation locations,
+%(3) read data in various formats and compute data residuals,
+%(4) provide a range of penalty functions to work with and
+%(5) numerically compute the derivative of the penalty function, or run the adjoint if provided.
+%% (6) perform addition and component-wise multiplication in the model parameter space.
+%The latter entails a call to apply the adjoint code to the weighted data residuals, which in essence implements multiplication by transposed Jacobian to obtain a perturbation of the model parameters, without a direct computation or storage of the Jacobian matrix.
+%
+%Including adjoint functionality in a modeling framework, though challenging, would provide the greatest performance gains.
+%As discussed in Section 3, it would dramatically reduce both computational and storage costs.  Without this functionality,
+%computing a penalty function derivative for a coupled model requires computing, storing and multiplying the Jacobian matrices.
+%If $N_d$ is the number of data points, and $N_m$ is the 
+%% dimension of the model space
+%% (i.e., the number of variable input parameters to the code),
+%the number of model design parameters,
+%the Jacobian has $N_d \times N_m$ entries and requires at least $\min(N_d+1, N_m+1)$ model runs if the adjoint is available, and $N_d \times (N_m + 1)$ model runs otherwise. For nonlinear models, all of these computations need to be performed repeatedly while the optimization algorithm iteratively converges to a solution. For the least-squares type of problem, the adjoint computations allow us to reduce this complexity to $2$ model runs per algorithm iteration, and no additional storage except for that of the intermediate solutions, needed to evaluate the total penalty function derivative. This therefore makes arbitrarily complex coupling problems potentially tractable.
+
+%=================================================================================
+
+Brute-force penalty function derivative computations for coupled models require computing, storing and multiplying the Jacobian matrices. This becomes prohibitive for models that are nonlinear, with more than a few design parameters, and/or long run times. If $N_d$ is the dimension of the output vector field or the number of data points, and $N_m$ is the the number of model design parameters for one model, its Jacobian has $N_d \times N_m$ entries and requires at least $\min(N_d+1, N_m+1)$ model runs if the adjoint is available, and
+%% $N_d \times (N_m + 1)$
+$(N_m + 1)$
+model runs otherwise. The matrix would need to be computed for each model in the coupling sequence, and for nonlinear models these computations need to be performed repeatedly while the optimization algorithm iteratively converges to a solution.\\
+
+Fortunately, as discussed in Section 3.3.1, a derivative of the penalty function
+%% , e.g., for the least-squares type of problem,  %%%%%%%%
+may be obtained in $N_m+1$ coupled model runs by numerical differentiation, and in as few as $2$ coupled model runs by an adjoint method. The latter entails a call to apply the adjoint code to the weighted data residuals, which in essence implements multiplication by transposed Jacobian to obtain a perturbation of the model design parameters, without a direct computation or storage of the Jacobian matrix. These methods come at no additional storage cost except for that of the intermediate solutions, needed to evaluate the total penalty function derivative, and therefore make arbitrarily complex coupling problems potentially tractable.\\
+
+% To summarize, a modeling framework that supports model uncertainty analysis must be able to:
+To summarize, several new capabilities must be added to a model framework in order to support 
+user-friendly inverse modeling.
+% model uncertainty analysis.
+Specifically, it must be able to:
+(1) store and perform arithmetic operations with the parameters and data for each model,
+(2) interpolate in space and time to provide predictions at observation locations,
+(3) read data in various formats and compute data residuals,
+(4) provide a range of penalty functions to work with,
+(5) numerically compute the derivative of the penalty function, or run the adjoint if provided,
+(6) make use of numerical efficiencies to compute and manipulate Jacobian matrices and higher order derivatives.
+
+%=================================================================================
+
+%The inclusion of the adjoint functionality into a model coupling framework is the most challenging, while also the most revolutionary development. As discussed in Section 3, this slashes down both the computational and storage costs dramatically. Without such functionality, computation of a penalty functional derivative of a coupled code would require that we compute, store and multiply the Jacobian matrices. If $N_d$ is the number of data points, and $N_m$ is the dimension of the model space (i.e., the number of variable input parameters to the code), the Jacobian has $N_d \times N_m$ entries and requires at least min($N_d+1$,$N_m+1$) model runs if the adjoint is available, and $N_d \times (N_m + 1)$ model runs otherwise. For non-linear models, all these computations need to be performed repeatedly while the optimization algorithm iteratively converges to a solution. For the least-squares type of problem, the adjoint computations allow us to reduce this complexity to 2 model runs per algorithm iteration, and no additional storage except for that of the intermediate solutions, needed to evaluate the total penalty functional derivative. This methodology therefore makes arbitrarily complex coupling problems potentially tractable.\\
+
+%-------------------------------------------------------------------------------------------------------
+% REVIEWER:  The Jacobian is available; I do not understand what the big deal is of storing or accessing its elements.
+
+% From Anna:
+%The challenge of this problem (and the proposed solution) is that in fact, computing and storing the Jacobian in a model coupling framework will in general be prohibitively expensive, both in terms of computational time and storage space. While the derivative of the penalty functional may be obtained at the cost equivalent to two forward modeling runs using the adjoint approach, the cost of evaluation of the full Jacobian is that times the number of data points (data space approach) or the number of model parameters (model space approach). This can quickly get out of hand for large model parameter spaces and/or large data sets. Thus we propose an approach that allows the penalty functional derivatives to be computed numerically without ever computing and storing the full Jacobian, unless explicitly requested.
+% This was discussed on line 843 and below, but is now cut out for simplicity.
+% The adjoint methodology is in general well-known and developed in oceanography, geophysics, meteorology, and other disciplines. The only novelty here is its application to a model coupling formalism.
+
+%-------------------------------------------------------------------------------------------------------
+\section{Summary and Recommendations}
+
+Computational models are a powerful means of understanding the Earth system, making predictions and guiding decisions.  Too often, however, models are used without any analysis of their uncertainty.  The integration of toolkits such as DAKOTA into component-based modeling frameworks will help to resolve this by drawing attention to the problem and providing easy access to powerful methods, thereby making it much easier for users to quantify, assess and understand the uncertainty in models.
+%
+Background information on modeling frameworks and inverse modeling were provided in
+Sections (\ref{framework_background}) and Section (\ref{inverse_background}) and
+%% A very brief overview of inverse modeling was provided in Section (\ref{inverse_background}) and
+a list of major software toolkits for uncertainty quantification and inverse modeling
+% and data assimilation
+was given in Section (\ref{tools}).  Since most of these toolkits use the same approach to interacting with models,
+it appears feasible for a modeling framework to provide access to more than one such package.
+Section (\ref{long_profile_nls_problem}) used an example surface process problem to illustrate some of the issues that
+are encountered in real applications and to give a taste of what toolkits like DAKOTA have to offer modelers.
+%
+In Section (\ref{sources_of_model_uncertainty}) it was argued that the primary sources of error in computational models
+can be usefully organized into four groups ---  model inadequacy, input data inadequacy, model parameter and input data
+uncertainty and developer and user errors --- and that modeling frameworks could address many of them.
+%
+Finally, several technical issues regarding the inclusion of inverse modeling in a model coupling framework
+were discussed in Section (\ref{framework_inclusion}).
+
+%===============================================================
+% Removed by SDP for Jan 2016 resubmission
+%===============================================================
+%Specific ways to reduce these various sources of error were discussed, and an introduction to the key methods for uncertainty quantification and inverse modeling was provided in Sections
+%(\ref{uncertainty_background}) and (\ref{inverse_background}).
+%%A gentle introduction to a large number of topics that fall within the purview of uncertainty quantification and inverse modeling was provided in sections  (\ref{uncertainty_background}) and (\ref{inverse_background}), respectively. 
+%A basic understanding of these concepts is essential in order to understand, appreciate and use the wide variety of capabilities that are available within existing software packages. 
+%% It is easy for the uninitiated to become lost due to all of the new concepts and technical terminology, some of which is used with a different meaning in different disciplines. 
+%%While key terminology was explained, many specific algorithms were mentioned but not explained due to lack of space.  However, details for these may easily be found on Wikipedia and elsewhere.
+%While key terminology was explained, many algorithms were merely mentioned by name, making it possible for the interested reader to learn more about them from books and Wikipedia articles.
+
+%An overview of DAKOTA was provided in section 5.  This overview provided sufficient detail for readers to quickly begin using DAKOTA, and to make better use of DAKOTA’s documentation, even if initially unfamiliar with many of the underlying concepts and methods.  It explained in a fair amount of concise detail the various ways in which DAKOTA can be connected to a model.  Section 5 (and also section 2) also identified what are expected to be the key technical issues with regard to integrating DAKOTA with CSDMS.
+
+Key design criteria for including inverse modeling in a component-based modeling framework are: (1) minimal changes to models, (2) minimal loss of performance and (3) minimal effort for developers and users.  Optimization methods that are derivative-free or that work well with numerical derivatives will be easiest to provide, but will still require tools for defining cost functions and the ability to ingest observational data in different formats.  Methods that use analytic or automatic differentiation, as well as adjoint methods, will require service components to be added to the modeling framework that compute, store and manipulate Jacobians and Hessians.  Separate methods will be required for models coupled in series or in parallel and changes to component model interfaces, such as the CSDMS Basic Model Interface (BMI), may also be required. 
+
+%can be provided relatively easily, methods that use analytic
+%A key design question for including inverse modeling
+%% and uncertainty quantification
+%in a component-based modeling framework is how to create a service component that can compute the derivatives
+%required for
+%% uncertainty analysis
+%the many optimization
+%methods that require derivatives.  It is not yet clear whether this can be done entirely outside of a model's own
+%source code or whether extensions to the CSDMS Basic Model Interface (BMI) will be necessary, especially if the
+%goal is to provide automatic differentiation, as defined in Section~(\ref{inverse_background}). 
+%More work will be needed to design an approach to this problem that requires minimal work on the part of
+%developers without imposing a significant extra computational cost. 
+%It should also be noted that while the tools 
+%in packages like DAKOTA help users to quantify, assess and understand the uncertainty in models, they do not
+%automatically or necessarily lead to any reduction in a model's uncertainty.
+
+%=======================================================================
+% Removed by SDP for Jan 2016 resubmission
+%=======================================================================
+%The integration of toolkits like DAKOTA into modeling frameworks like CSDMS should encourage more
+%modelers to incorporate uncertainty quantification and inverse modeling methods into their workflows.
+%Clinics and training workshops may also help to educate, excite and encourage them to
+%begin using these methods.
+% once they are made available within a modeling framework such as CSDMS.
+
+%Finally, there are significant social, cultural and educational barriers that must be overcome in order for the modeling
+%communities served by CSDMS and other modeling frameworks to begin incorporating uncertainty quantification
+%and inverse modeling methods into their workflow. 
+%%While the inverse modeling community already has an appreciation for these methods, this is much less the case
+%%for the forward modeling community.
+%Clinics and training workshops may be one way to educate, excite and encourage this modeling community to
+%begin using these methods once they are made available within a modeling framework such as CSDMS.
+
+%-------------------------------------------------------------------------------------------------------
+\section*{Acknowledgments}
+
+The authors gratefully acknowledge funding through a cooperative agreement with the National Science
+Foundation (CSDMS, EAR-0621695) and NSF grant number (EarthCube, ICER-1343811).
+
+%-------------------------------------------------------------------------------------------------------
+\section*{Appendix A:  Best-Fit Parameters for a Class of Profile Models}
+
+\citet{Peckham_2015} reviews several physics-based derivations that predict functional forms for the
+longitudinal elevation profiles of rivers (i.e. elevation as a function of distance downstream from a
+drainage divide).  Several of these profiles can be expressed in the form
+%
+\begin{linenomath*}
+\begin{equation}
+z(x) = z_0 - c \, H(p, x, x_0),
+\label{power_curve}
+\end{equation}
+\end{linenomath*}
+% where $c > 0$ and $p > 0$.
+where $H(p, x_0, x_0) = 0$.   The results of this section apply to an otherwise arbitrary function $H$.
+The Whipple-Tucker profile is in a special subclass where $H(p,x,x_0) = f(p,x) - f(p,x_0)$,
+with $f(p,x) = (1/p) x^p$. 
+% Depending on the sign of $c$, if is possible to have $p < 0$.
+% Special cases of $f(p,x)$ in (\ref{power_curve}) include $(1/p) \, x^p$, $x^p$ and $\ln^p(x)$.
+Note that $x \ge x_0$ and the profile is {\it pinned} at the upper end to measured values since $z(x_0) = z_0$.
+Since real elevation profiles are decreasing, upward-concave functions of downstream distance, $x$,
+we require $z(x)$ to have these features. This can occur with $c > 0$ and $H(p, x, x_0)$ an increasing
+function of $x$, or with $c < 0$ and $H(p, x, x_0)$ a decreasing function of $x$.
+It is also desirable for the slope at $x_0$, $S_0 = |z'(x_0)|$, to be {\it finite}, and for some models this only
+occurs if $x_0 > 0$.  
+
+%In each of these cases, $f(p,x)$ is an increasing function of $x$, while $z(x)$ is
+%decreasing and upward concave.
+%For these cases we also need $x_0 > 0$ in order for the slope at $x_0$ to be finite.
+For elevation profiles predicted by theory, the design parameters $c$ and $p$ are functions of both
+physical-process and empirical parameters, such as those that model a steady-state fluvial
+landscape where rainfall-induced erosion is exactly balanced by a steady and spatially uniform
+tectonic uplift rate.  Theory may constrain the signs of $c$ and $p$.
+
+%Let  $f(p,x) = (1/p) \, x^p$ for (\ref{power_curve1}) or
+%$f(p,x) = x^p$ for (\ref{power_curve2}) and define
+%$H(p, x_k, x_0) = f(p, x_k) - f(p, x_0)$.
+%%
+%\begin{equation}
+%E(c,p) = \sum_{k=1}^n \left\{ z_k - \left[ z_0 - c \,(f(x_k,p) - f(x_0,p)) \right] \right\}^2
+%\end{equation}
+%%
+A {\it nonlinear least squares} fit of the model (\ref{power_curve}) to a measured profile of elevations,
+$(x_k, z_k)$, $k \in \{0, ..., n\}$ seeks a parameter pair $(c_0, p_0)$ that minimizes the following {\it cost function}:
+%
+\begin{linenomath*}
+\begin{equation}
+E(c,p) = \sum_{k=1}^n \left[ z_k - z(x_k) \right]^2 = \sum_{k=1}^n \left[ \left( z_k - z_0 \right) +c \, H(p, x_k, x_0)  \right]^2
+%% E(c,p) = R^2 = \sum_{k=1}^n \left[ \left( z_k - z_0 \right) +c \, H(p, x_k, x_0)  \right]^2
+\label{cost_function1}
+\end{equation}
+\end{linenomath*}
+%
+Figure~(\ref{fig6-cost-function-contours}) shows a contour plot for this cost function over the $(c,p)$ plane for a particular set of
+measured elevation profile values, $(x_k, z_k)$ and the special subclass mentioned above with $f(p,x) = (1/p) x^p$.
+%
+%-----------------------------------------------------------------------------------
+% Figure 3.  Cost function for power-law optimization problem.
+%-----------------------------------------------------------------------------------
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.6\textwidth]{figs/fig6-cost-function-contours}
+	\caption{Contour plot for a typical cost function when $f(x,p) = (1/p)x^p$, with extreme
+	vertical exaggeration to show global minimum.
+	For this example, $c_0 = 25$ and $p_0 = 0.166$.}
+	\label{fig6-cost-function-contours}
+\end{figure}
+%
+%-----------------------------------------------------------------------------------
+% Figure 4.  The curves c_1(p) and c_2(p).
+%-----------------------------------------------------------------------------------
+\begin{figure}
+	\centering
+    	\includegraphics[width=0.85\textwidth]{figs/fig7-c1-and-c2-functions}
+	\caption{The (difficult to distinguish) curves $c_1(p)$ (yellow) and $c_2(p)$ (blue) that cross
+	at the best-fit $(c,p)$. For this example, they cross at $c=28.2491$, $p=0.14075$.}
+	\label{fig7-c1-and-c2-functions}
+\end{figure}
+%
+Note that the global minimum lies in a broad, flat valley, very similar to what happens for the
+well-known Rosenbrock function (see Figure 1).
+This similarity appears to explain why many curve-fitting algorithms
+struggle or fail to converge to the minimum, at least when $f(p,x) = (1/p)x^p$. 
+As with the Rosenbrock function, it is easy for optimization algorithms to find the valley but
+remains difficult for them to find the global minimum.
+
+The nature of this broad, flat valley can be understood geometrically.  First, notice that for $n=1$,
+$E(c,p)$ plots as a valley in the $(c,p)$ plane that attains its minimum value (zero in this case)
+along the entire curve given by $c = p \, (z_0 - z1) / (x_1^p - x_0^p)$.
+This curve diverges at $p=0$ and rapidly decreases with increasing $p$.
+The position of the valley depends on $(x_0, z_0)$ and $(x_1, z_1)$, but there is no global minimum.
+The cost function (\ref{cost_function1}) may be viewed as a sum of such valley surfaces, all offset
+somewhat from one another, which results in a surface with a global minimum that lies in a
+broad valley.
+
+%Expanding the square in (\ref{cost_function1}), we have
+%%
+%\begin{equation}
+%E(c,p) = \sum_{k=1}^n \left( z_k - z_0 \right)^2
+%  + 2 c \sum_{k=1}^n \left( z_k - z_0 \right) H(p, x_k, x_0)
+%  + c^2 \sum_{k=1}^n H^2(p, x_k, x_0)
+%\label{cost_function2}
+%\end{equation}
+%%
+%The first term does not depend on $c$ or $p$ and therefore does not affect the best-fit values
+%of $c$ and $p$.  If (\ref{cost_function2}) has a minimum,
+If the cost function (\ref{cost_function1}) has a minimum, it must occur where all components
+of its gradient vector (i.e. the partial derivatives with respect to $c$ and $p$) are equal to zero.
+Computing the derivative of (\ref{cost_function1}) with respect to $c$, setting it to zero and
+solving for $c$, gives
+%
+\begin{linenomath*}
+\begin{equation}
+c_1(p) = { \sum_{k=1}^n \left( z_0 - z_k  \right) H(p, x_k, x_0) \over
+                 \sum_{k=1}^n H^2 \left( p, x_k, x_0 \right)}.
+\label{c1_equation}
+\end{equation}
+\end{linenomath*}
+%
+This is a curve in the $(c,p)$ plane along which
+$\partial E/\partial c = 0$.
+% $E_c(c,p) = 0$.
+Computing the derivative of  (\ref{cost_function1}) with respect to $p$, setting it to zero and
+again solving for $c$, gives
+%
+\begin{linenomath*}
+\begin{equation}
+c_2(p) = { \sum_{k=1}^n \left( z_0 - z_k  \right) \partial H(p, x_k, x_0) / \partial p \over
+                 \sum_{k=1}^n H \left( p, x_k, x_0 \right)
+                              \partial H( p, x_k, x_0) / \partial p}.
+\label{c2_equation}
+\end{equation}
+\end{linenomath*}
+%
+%%
+%\begin{equation}
+%c_2(p) = {- \sum_{k=1}^n \left( z_k - z_0 \right) H_p(p, x_k, x_0) \over
+%                  \sum_{k=1}^n H \left( p, x_k, x_0 \right)  H_p \left( p, x_k, x_0 \right)}
+%\label{c2_equation}
+%\end{equation}
+%%
+This is a curve in the $(c,p)$ plane along which
+$\partial E/\partial p = 0$.
+% $E_p(c,p) = 0$.
+%Here, subscripts $p$ and $c$ on $E$ and $H$ denote partial derivatives.
+As shown in Figure~(\ref{fig7-c1-and-c2-functions}),
+the curves $c_1(p)$ and $c_2(p)$ are very close to one another,
+and close to the bottom of the valley, but they cross at a single point which
+gives the best-fit $(c,p)$ pair.   Since the best-fit pair lies on the curve $c_1(p)$,
+we can insert $c = c_1(p)$ into the cost function (\ref{cost_function1}) to get a new
+cost function that depends only on $p$, namely $E(p) = E( c_1(p), p)$. 
+After simplification, we find that
+%
+\begin{linenomath*}
+\begin{equation}
+E( p ) = \sum_{k=1}^n \left( z_0 - z_k \right)^2 -
+    { \left[ \sum_{k=1}^n \left( z_0 - z_k \right) H(p, x_k, x_0) \right]^2  \over
+        \sum_{k=1}^n H^2(p, x_k, x_0) }.
+\label{E_on_c1_equation0}
+\end{equation}
+\end{linenomath*}
+%
+Notice the power of $2$ in the numerator of the last term, not present in (\ref{c1_equation}).
+For both $f(p,x)=(1/p)x^p$ and $f(p,x)=x^p$, this simplifies further to
+%
+\begin{linenomath*}
+\begin{equation}
+E( p ) = \sum_{k=1}^n \left( z_0 - z_k \right)^2 -
+    { \left[ \sum_{k=1}^n \left( z_0 - z_k \right) \left( x_k^p - x_0^p \right) \right]^2  \over
+        \sum_{k=1}^n \left( x_k^p - x_0^p \right)^2 }.
+\label{E_on_c1_equation}
+\end{equation}
+\end{linenomath*}
+%
+The best-fit $p$-value, $p_0$, minimizes  $E(p)$ for a given set of measured
+values $(x_k, z_k)$.
+%% The first term does not depend on $p$ and does not affect the optimal $p$-value.
+We can therefore find $p_0$ by computing the derivative of (\ref{E_on_c1_equation})  with
+respect to $p$, setting the result to zero and solving for $p$.  While there
+isn't a closed form expression for $p_0$, a numerical root finder can be used.
+Another simple approach is to evaluate (\ref{E_on_c1_equation}) at $1000$ equally-spaced
+$p$-values in the interval $[0,1]$ and then find the $p=p_0$ for which $E(p)$ is smallest.
+This rapidly yields the best-fit value, $p_0$, to three significant digits.
+Once $p_0$ has been found, $c_0$ can be computed as $c_0 = c_1(p_0) $.
+%Interestingly, the best-fit $p$ is the same whether we take $f(p,x)=(1/p)x^p$ or $f(p,x)=x^p$
+%because the $(1/p)$ factors on top and bottom cancel in (\ref{E_on_c1_equation}).
+%The best-fit $c$ values computed from (\ref{c1_equation}) can therefore be seen to differ
+%only by a factor of $p$.
+%
+
+%-------------------------------------------------------------------------------------------------------------------------
+% Removed due to word count limit
+%---------------------------------------------------
+%\subsection{A Closed-Form, But Often Poor Approximation via Linearization}
+%
+%For the special case of $f(p,x) = (1/p) x^p$, an approximate formula for the best-fit $(c,p)$
+%pair can be obtained by linearizing the problem as follows.
+%If we neglect the $x_0^p$ term in (\ref{power_curve})
+%% or in (\ref{power_curve2})
+%(assuming $x_0^p \ll x_k^p$ for most $k$), then the shifted data values are $(z_k - z_0)$
+%and the model values are $(c/p) x_k^p$.  Instead of comparing these directly, we can
+%compare their logs, which results in a {\it linear least squares} problem with cost function
+%%
+%\begin{linenomath*}
+%\begin{equation}
+%E(c,p) = \sum_{k=1}^n \left[ A_k - \ln \left( c / p \right) - p \, B_k \right]^2,
+%\end{equation}
+%\end{linenomath*}
+%%
+%where $A_k = \ln( z_0 - z_k )$ and $B_k = \ln( x_k )$.
+%Setting $\partial E(c,p)/\partial c = 0$ and solving for $c$ we get
+%%
+%\begin{linenomath*}
+%\begin{equation}
+%c_1(p) = p \exp \left[ {1 \over n} \sum_{k=1}^n \left( A_k - p B_k \right) \right].
+%\end{equation}
+%\end{linenomath*}
+%%
+%Setting $\partial E(c,p)/\partial p = 0$ and solving for $c$ we get
+%%
+%\begin{linenomath*}
+%\begin{equation}
+%c_2(p) = p \exp \left[ \sum_{k=1}^n \left( A_k - p B_k \right) \left( 1 - p B_k \right) \over
+%                                \sum_{k=1}^n \left( 1 - p B_k \right) \right].
+%\end{equation}
+%\end{linenomath*}
+%%
+%Setting $c_1(p) = c_2(p)$, we can solve for $p_0$ for arbitrary $(x_k, z_k)$ to get
+%%
+%\begin{linenomath*}
+%\begin{equation}
+%p_0 = { \left( \sum_{k=1}^n A_k \right) \left( \sum_{k=1}^n B_k \right) -
+%                      n \, \sum_{k=1}^n A_k B_k \over
+%             \left( \sum_{k=1}^n B_k \right)^2 - n \, \left( \sum_{k=1}^n B_k^2 \right) } .
+%\end{equation}
+%\end{linenomath*}
+%%
+%Then $c_0$ can be computed as $c_1(p_0)$.
+%This closed-form result for {\it linear} least squares was found independently by Gauss
+%and Legendre. However, this method of computing
+%$(c_0, p_0)$ is not very accurate for our nonlinear problem, even when $x_0 = 0$.
+%For the Beaver Creek profile data, it performed poorly, yielding
+%$(p_0, c_0) = (0.192, -11.50)$  % (for upstream profile with: x_0 > 0)
+%% $(p_0, c_0) = (0.191, -11.54)$  % (for downstream profile with: x_0 = 0)
+%compared to $(0.133, -14.66)$ by the exact method.
+%It is well-known that transforming a nonlinear fitting function (e.g. by taking logs) to
+%convert a nonlinear least squares problem to a linear least squares problem
+%introduces bias.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%For a test problem designed to
+%have $(c_0, p_0) = (25, 0.166)$ and $x_0 = 2$, this method performed quite poorly,
+%yielding $p_0 = 0.385$.
+%In addition, transforming a nonlinear fitting function (e.g. by taking logs) to convert
+%a nonlinear least squares problem to a linear least squares problem is known to
+%introduce bias.
+
+%---------------------------------------------------
+% Removed due to word count limit
+%---------------------------------------------------
+%Another approximate formula for the best-fit $(c,p)$ pair can be computed as follows.  First, note
+%that the curve $f(p,x) = (1/p) x^p$ has a single minima at $p = 1/\log(x)$.  Expanding $f(p,x)$ in a
+%Taylor series about this minima, we get an approximation to $f(p,x)$ that is quadratic in $p$:
+%%
+%\begin{equation}
+%g(p,x) = e \log(x) + {e \over 2} \log^3(x) \left( p - {1 \over \log(x)} \right)^2
+%\end{equation}
+%%
+%Figure 6 shows $f(p,x)$ and $g(p,x)$ for $x = 10$.
+%%
+%%-----------------------------------------------------------------------------------
+%% Figure 6.  The curves f(p,x) and g(p,x).
+%%-----------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.9\textwidth]{fig6-f-vs-g}
+%	\caption{The curve $f(p,x)$ (blue) and its approximation $g(p,x)$ (yellow) for $x=10$.}
+%	\label{fig6-f-vs-g}
+%\end{figure}
+%%
+%First, we replace $f(p,x)$ with $g(p,x)$ in the definition of $H(p, x_k, x_0)$, which appears in
+%(\ref{cost_function1}).  We then approximate $H^2(p, x_k, x_0)$ in (\ref{cost_function1})
+%with $g(x_k, 2p) + g(x_0, 2p)$.  This yields an approximation to the cost function
+%(\ref{cost_function1}) for which the minimizing $p$-value can be computed in closed form for
+%arbitrary profile data, $(x_k, z_k)$.  The result is
+%%%
+%%\begin{equation}
+%%p_0 = {\sum_{k=1}^n \left( c_0 + z_k - z_0 \right) \log^2(x_k) +
+%%                 \left[ n (c_0 + z_0) - \sum_{k=1}^n z_k \right] \log^2(x_0)  \over
+%%           \sum_{k=1}^n \left( 2c_0 + z_k - z_0 \right) \log^3(x_k) +
+%%                  \left[ n (2c_0 + z_0) - \sum_{k=1}^n z_k \right] \log^3(x_0) }.
+%%\end{equation}
+%%%
+%%%
+%%\begin{equation}
+%%p_0 = {\sum_{k=1}^n \left( z_k - z_0 \right) \left[ \ln^2(x_k) - \ln^2(x_0) \right] +
+%%                \sum_{k=1}^n c_0 \left[ \ln^2(x_k) + \ln^2(x_0) \right] \over
+%%            \sum_{k=1}^n \left( z_k - z_0 \right) \left[ \ln^3(x_k) - \ln^3(x_0) \right] +
+%%                \sum_{k=1}^n 2 c_0 \left[ \ln^3(x_k) + \ln^3(x_0) \right] }
+%%\end{equation}
+%%%
+%%
+%\begin{equation}
+%p = {\sum_{k=1}^n \left( z_k - z_0 \right) \left( A_k - A_0 \right) +
+%                c \sum_{k=1}^n \left( A_k + A_0 \right) \over
+%            \sum_{k=1}^n \left( z_k - z_0 \right) \left( B_k - B_0 \right) +
+%               2 \, c \sum_{k=1}^n \left( B_k + B_0 \right) }
+%\end{equation}
+%%
+%where $A_k = \ln^2(x_k)$ and $B_k = \ln^3(x_k)$.
+%This may be viewed as an approximate inverse to $c_2(p)$, given in (\ref{c2_equation}).
+%For a test problem with exact values of $p_0 = 0.166$ and $c_0 = 25.0$, this
+%approximate formula gave $p_0 = 0.1697$.
+
+
+%-------------------------------------------------------------------------------------------------------
+%   Figures and captions, placed at the end for submission
+%-------------------------------------------------------------------------------------------------------
+
+%\newpage  %%%%%%%%%%%
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.9\textwidth]{fig1-rosenbrock-function}
+%	\caption{The Rosenbrock function, a classic test problem in optimization.}
+%	\label{fig-rosenbrock-function}
+%\end{figure}
+%
+%\newpage  %%%%%%%%%%%
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.5\textwidth]{fig2-hessian-matrix}
+%	\caption{Hessian matrix.}
+%	\label{fig2-hessian-matrix}
+%\end{figure}
+
+
+% \pagebreak   % (suggested)
+% \newpage     % (requested)
+
+%-------------------------------------------------------------------------------------------------------
+%% The Appendices part is started with the command \appendix;
+%% appendix sections are then done as normal sections
+%% \appendix
+
+%\newpage  %%%%%%%%%%%
+%\appendix
+%
+%\section{A power-law optimization problem}
+%\label{appendix-1}
+%
+%\bigskip
+%\bigskip
+
+
+%-------------------------------------------------------------------------------------------------------
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%%
+%%  \citet{key}  ==>>  Jones et al. (1990)
+%%  \citep{key}  ==>>  (Jones et al., 1990)
+%%
+%% Multiple citations as normal:
+%% \citep{key1,key2}         ==>> (Jones et al., 1990; Smith, 1989)
+%%                            or  (Jones et al., 1990, 1991)
+%%                            or  (Jones et al., 1990a,b)
+%% \cite{key} is the equivalent of \citet{key} in author-year mode
+%%
+%% Full author lists may be forced with \citet* or \citep*, e.g.
+%%   \citep*{key}            ==>> (Jones, Baker, and Williams, 1990)
+%%
+%% Optional notes as:
+%%   \citep[chap. 2]{key}    ==>> (Jones et al., 1990, chap. 2)
+%%   \citep[e.g.,][]{key}    ==>> (e.g., Jones et al., 1990)
+%%   \citep[see][pg. 34]{key}==>> (see Jones et al., 1990, pg. 34)
+%%  (Note: in standard LaTeX, only one note is allowed, after the ref.
+%%   Here, one note is like the standard, two make pre- and post-notes.)
+%%
+%%   \citealt{key}          ==>> Jones et al. 1990
+%%   \citealt*{key}         ==>> Jones, Baker, and Williams 1990
+%%   \citealp{key}          ==>> Jones et al., 1990
+%%   \citealp*{key}         ==>> Jones, Baker, and Williams, 1990
+%%
+%% Additional citation possibilities
+%%   \citeauthor{key}       ==>> Jones et al.
+%%   \citeauthor*{key}      ==>> Jones, Baker, and Williams
+%%   \citeyear{key}         ==>> 1990
+%%   \citeyearpar{key}      ==>> (1990)
+%%   \citetext{priv. comm.} ==>> (priv. comm.)
+%%   \citenum{key}          ==>> 11 [non-superscripted]
+%% Note: full author lists depends on whether the bib style supports them;
+%%       if not, the abbreviated list is printed even when full requested.
+%%
+%% For names like della Robbia at the start of a sentence, use
+%%   \Citet{dRob98}         ==>> Della Robbia (1998)
+%%   \Citep{dRob98}         ==>> (Della Robbia, 1998)
+%%   \Citeauthor{dRob98}    ==>> Della Robbia
+
+
+%% References with bibTeX database:
+
+\newpage
+\bibliographystyle{elsarticle-harv}
+
+%--------------------------------------------
+% This uses a separate BIB file.
+%--------------------------------------------
+\bibliography{Uncertainty_2015}
+
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use elsarticle-harv.bst.
+
+%% References without bibTeX database:
+
+%\begin{thebibliography}{00}
+%
+%%% \bibitem must have one of the following forms:
+%%%   \bibitem[Jones et al.(1990)]{key}...
+%%%   \bibitem[Jones et al.(1990)Jones, Baker, and Williams]{key}...
+%%%   \bibitem[Jones et al., 1990]{key}...
+%%%   \bibitem[\protect\citeauthoryear{Jones, Baker, and Williams}{Jones
+%%%       et al.}{1990}]{key}...
+%%%   \bibitem[\protect\citeauthoryear{Jones et al.}{1990}]{key}...
+%%%   \bibitem[\protect\astroncite{Jones et al.}{1990}]{key}...
+%%%   \bibitem[\protect\citename{Jones et al., }1990]{key}...
+%%%   \harvarditem[Jones et al.]{Jones, Baker, and Williams}{1990}{key}...
+%%%
+%
+%% \bibitem[ ()]{}
+%
+%\bibitem[{\textit{Adams et al.}(2013a)}]{Adams_et_al_2013a}
+%Adams, B.M., M.S. Ebeida, M.S. Eldred, J.D. Jakeman, L.P. Swiler, K.R. Dalbey, J.P. Eddy, K.T. Hu, D.M. Vigil, L.E. Bauman, P.D. Hough (2013)
+%DAKOTA, A Multilevel Parallel Object-Oriented Framework for Design Optimization, Parameter Estimation, Uncertainty Quantification, and Sensitivity Analysis, Version 5.3.1 User's Manual, 329 pp.
+%
+%\bibitem[{\textit{Adams et al.}(2013b)}]{Adams_et_al_2013b}
+%Adams, B.M., M.S. Ebeida, M.S. Eldred, J.D. Jakeman, L.P. Swiler, W.J. Bohnhoff, K.R. Dalbey, J.P. Eddy, K.T. Hu, D.M. Vigil, L.E. Bauman (2013) DAKOTA, A Multilevel Parallel Object-Oriented Framework for Design Optimization, Parameter Estimation, Uncertainty Quantification, and Sensitivity Analysis, Version 5.3.1 Reference Manual, 229 pp.
+%
+%\bibitem[{\textit{Beven and Binley}(1992)}]{Beven_and_Binley_1992}
+%Beven, K.J. and Binley, A.M. (1992)
+%The future of distributed models: model calibration and uncertainty prediction,
+%{\it Hydrological Processes}, 6, p.279--298.
+%
+%\bibitem[{\textit{Beven and Freer}(2001)}]{Beven_and_Freer_2001}
+%Beven, K.J. and Freer, J. (2001)
+%Equifinality, data assimilation, and uncertainty estimation in mechanistic modelling of complex environmental systems,
+%{\it Journal of Hydrology}, 249, 11--29.
+%
+%\bibitem[{\textit{Beven}(2006)}]{Beven_2006}
+%Beven, K.J. (2006)
+%A manifesto for the equifinality thesis,
+%{\it Journal of Hydrology}, 320, p.18--36.
+%
+%\bibitem[{\textit{Beven}(2007)}]{Beven_2007}
+%Beven, K.J. (2007)
+%Towards integrated environmental models of everywhere: uncertainty, data and modelling as a learning process,
+%{\it Hydrology and Earth System Sciences}, 11(1), p. 460--467.
+%
+%\bibitem[{\textit{Conn et al.}(2009)}]{Conn_et_al_2009}
+%Conn, A.R., K. Scheinberg and L.N. Vicente (2009)
+%{\it Introduction to Derivative-Free Optimization},
+%MPS-SIAM Book Series on Optimization. Philadelphia: SIAM.
+%
+%\bibitem[{\textit{Eddy and Lewis}(2001)}]{Eddy_and_Lewis_2001}
+%Eddy, J. E. and Lewis, K. (2001)
+%Effective Generation of Pareto Sets using Genetic Programming,
+%{\it Proceedings of ASME Design Engineering Technical Conference}
+%
+%\bibitem[{\textit{Adams et al.}(2013)}]{Adams_et_al_1974}
+%Gablonsky, J. (2001)
+%DIRECT version 2.0 Userguide Technical Report CRSC-TR01-08,
+%Center for Research in Scientific Computation,
+%North Carolina State University, Raleigh, NC.
+%
+%\bibitem[{\textit{Errico}(1997)}]{Errico_1997}
+%Errico, R.M. (1997)
+%What is an adjoint model?
+%{\it Bulletin of the American Meteorological Society},
+%78(11), 2577--2591.
+%
+%\bibitem[{\textit{Gill et al.}(1986)}]{Gill_et_al_1986}
+%Gill, P. E., Murray, W., Saunders, M. A., and Wright, M. H. (1986)
+%User’s Guide for NPSOL (Version 4.0): A Fortran Package for Nonlinear Programming,
+%{\it System Optimization Laboratory Technical Report SOL-86-2},
+%Stanford University, Stanford, CA.
+%
+%\bibitem[{\textit{Gray and Kolda}(2006)}]{Gray_and_Kolda_2006}
+%Gray, G. A. and Kolda, T. G. (2006)
+%Algorithm 856: APPSPACK 4.0: Asynchronous Parallel Pattern Search for Derivative-Free Optimization,
+%{\it ACM Transactions on Mathematical Software},
+%32(3), pp. 485--507.
+%
+%\bibitem[{\textit{Hill and Tiedeman}(2007)}]{Hill_and_Tiedeman_2007}
+%Hill, M. C. and C.R. Tiedeman (2007)
+%{\it Effective Groundwater Model Calibration: With Analysis of Data, Sensitivities, Predictions, and Uncertainty},
+%Wiley-Interscience, 455 pp.
+%
+%\bibitem[{\textit{Lebigot}(2013)}]{Lebigot_2013}
+%Lebigot, E.O. (2013)
+%Uncertainties: A Python package for calculations with uncertainties,
+%\url{http://pythonhosted.org/uncertainties/}
+%
+%\bibitem[{\textit{Mantovan and Todini}(2006)}]{Mantovan_and_Todini_2006}
+%Mantovan, P. and Todini, E. (2006)
+%Hydrological forecasting uncertainty assessment: Incoherence of the GLUE methodology,
+%{\it Journal of Hydrology}, 330(1–2), p. 368--381.
+%
+%\bibitem[{\textit{Meza et al.}(2007)}]{Meza_et_al_2007}
+%Meza, J. C., Oliva, R. A., Hough, P. D., and Williams, P. J. (2007)
+%OPT++: An Object-Oriented Toolkit for Nonlinear Optimization,
+%{\it ACM Transactions on Mathematical Software}, 33(2).
+%
+%\bibitem[{\textit{Peckham}(2014a)}]{Peckham_2014a}
+%Peckham, S.D. (2014a)
+%The CSDMS Standard Names:  Cross-domain naming conventions for describing process models,
+%data sets and their associated variables,
+%{\it Proceedings of the 7th Intl. Congress on Env. Modelling and Software},
+%International Environmental Modelling and Software Society (iEMSs),
+%San Diego, CA. (Eds.  D.P. Ames, N.W.T. Quinn, A.E. Rizzoli),
+%{\it http://www.iemss.org/society/index.php/iemss-2014-proceedings}
+%
+%\bibitem[{\textit{Peckham}(2014b)}]{Peckham_2014b}
+%Peckham, S.D. (2014b)
+%Longitudinal elevation profiles in rivers: Curve fitting with functions predicted by theory,
+%Proceedings of Geomorphometry 2015,
+%Poznan, Poland, pp. 1--4 (in press).
+%
+%\bibitem[{\textit{Peckham et al}(2013)}]{Peckham_et_al_2013}
+%Peckham, S.D., E.W.H. Hutton and B. Norris (2013)
+%A component-based approach to integrated modeling in the geosciences: The Design of CSDMS,
+%{\it Computers \& Geosciences, special issue: Modeling for Environmental Change},
+%53, 3--12,
+%\url{http://dx.doi.org/10.1016/j.cageo.2012.04.002}
+%
+%\bibitem[{\textit{Ross}(2001)}]{Ross_2001}
+%Ross, S. (2001)
+%{\it A First Course in Probability},
+%Prentice Hall, 6th edition, 528 pp.
+%
+%\bibitem[{\textit{Schittkowski}(2004)}]{Schittkowski_2004}
+%Schittkowski, K. (2004)
+%NLPQLP: A Fortran Implementation of a Sequential Quadratic Programming Algorithm with Distributed and Non-Monotone Line Search -- User’s Guide,
+%{\it Technical Report},
+%Department of Mathematics, University of Bayreuth, Bayreuth, Germany.
+%
+%\bibitem[{\textit{Taylor}(1982)}]{Taylor_1982}
+%Taylor, J.R. (1982)
+%{\it An Introduction to Error Analysis: The Study of Uncertainties in Physical Measurements},
+%University Science Books, 270 pp.
+%
+%\bibitem[{\textit{Vanderplaats}(1973)}]{Vanderplaats_1973}
+%Vanderplaats, G. N. (1973)
+%CONMIN - A FORTRAN Program for Constrained Function Minimization,
+%{\it NASA TM X-62282}. (see also: Addendum to Technical Memorandum, 1978).
+%
+%\bibitem[{\textit{Vanderplaats}(1995)}]{Vanderplaats_1995}
+%Vanderplaats Research and Development, Inc. (1995)
+%{\it DOT Users Manual}, Version 4.20,
+%Colorado Springs.
+%
+%\end{thebibliography}
+
+%--------------------------------------
+% More figures and captions
+%--------------------------------------
+\newpage
+%
+%-------------------------------------------------------------------------------------
+% Mary Hill's Figure 1.
+%-------------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.4\textwidth]{mary-fig1}
+%	\caption{The 95\% individual nonlinear confidence and credible intervals for (a and b) nonlinear test function 1:
+%	$y=x/a+ \sin( a m x) + \varepsilon$; (dots in Figure 1a are samples from MICA; dots in Figure 1b are from
+%	DREAM) and (c) test function 2:  $y = a+ (0.49-a)e - m(x-8) + \varepsilon$ (dots are from DREAM and similar
+%	to those from MICA). The black ellipses for an objective function value of $18.3$ in (a) and (b) and of $34.5$ in
+%	(c) are 95\% confidence regions. MCMC samples are plotted as dots: the upper 2.5\% and lower 2.5\% of
+%	predictions are green; the middle 95\% of predictions are yellow. [after Lu et al., 2012]}
+%	\label{mary-fig1}
+%\end{figure}
+%%
+%%-------------------------------------------------------------------------------------
+%% Mary Hill's Figure 2.
+%%-------------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.6\textwidth]{mary-fig2}
+%	\caption{Linear and nonlinear confidence intervals and nonlinear credible intervals
+%	($ \le 106$, $ \le 1594$, and $420,000$ model runs, respectively) for prediction of streamflow change.
+%	Horizontal line: true value of the prediction. Nonlinear credible intervals are calculated using DREAM.
+%	[after Lu et al., 2012]}
+%	\label{mary-fig2}
+%\end{figure}
+%%
+%%-------------------------------------------------------------------------------------
+%% Mary Hill's Figure 3.
+%%-------------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.6\textwidth]{mary-fig3}
+%	\caption{First-order sensitivity analysis. (a) Sobol' method gives one value for each parameter, showing
+%	``average'' over parameter space. (b) DELSA gives a distribution of values. The DELSA values
+%	can be plotted against, for example, RMSE. [Modified from Rakovec et al., 2014]}
+%	\label{mary-fig3}
+%\end{figure}
+%%
+%%-------------------------------------------------------------------------------------
+%% Mary Hill's Figure 4.
+%%-------------------------------------------------------------------------------------
+%\begin{figure}
+%	\centering
+%    	\includegraphics[width=0.6\textwidth]{mary-fig4}
+%	\caption{Plot using the value of parameter TIMEDELAY shows a surprise: models for which
+%	TIMEDELAY is important systematically fit the data poorly (large RMSE).
+%	[Modified from Rakovec et al., 2014]}
+%	\label{mary-fig4}
+%\end{figure}
+%%
+
+\end{document}
+
+%%
+%% End of file `Uncertainty_2014.tex'.
