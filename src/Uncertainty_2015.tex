@@ -289,9 +289,9 @@ Data-based model verification and validation -- including more formal data integ
 estimation -- and quantification of ever-present uncertainty are critical in order to develop reliable numerical models
 for observed Earth processes.
 
-The Community Surface Dynamics Modeling System, or CSDMS
-\citep{Peckham_et_al_2013, Syvitski_et_al_2014}
-is one example of a component-based modeling framework, employed in
+The Community Surface Dynamics Modeling System, or CSDMS,
+is one example of a component-based modeling framework
+\citep{Peckham_et_al_2013, Syvitski_et_al_2014}, employed in
 the realm of Earth surface process dynamics, with capabilities currently being extended to deep Earth process
 modeling. Just as CSDMS provides interoperability and coupling mechanisms for process-based models, it could
 also provide simplified access to model analysis programs.
@@ -418,9 +418,9 @@ optimization and uncertainty quantification.
 %uncertainty analysis and inverse modeling.  This paper seeks to explore and address some
 %of these technical and social challenges.
 
-DAKOTA and similar packages offer a suite of uncertainty analysis tools, including tools for model
-sensitivity analysis (e.g. sampling methods to explore the design parameter space) as well as
-inverse modeling (or parameter estimation).  However, the sensitivity analysis tools are easier to
+DAKOTA and similar packages offer an impressive suite of uncertainty analysis tools, including tools
+for model sensitivity analysis (e.g. sampling methods to explore the design parameter space) as well
+as inverse modeling (or parameter estimation).  However, the sensitivity analysis tools are easier to
 integrate within a modeling framework because they don't usually require capabilities beyond what
 a typical model (or composite model) already provides.  By contrast, inverse modeling requires
 construction of a suitable objective function and computation of derivatives and is also affected by
@@ -692,7 +692,7 @@ They therefore make use of {\it optimization methods} that seek
 %design parameters that
 to minimize an objective function, often subject to additional constraints.
 
-Earth surface process modelers range widely in their familiarity with and adoption of inverse modeling
+Earth system modelers range widely in their familiarity with and adoption of inverse modeling
 methodology.  For example, groundwater modelers have a long history of using inverse models, while
 sediment transport modelers do not.  Inclusion of these methods in modeling frameworks should
 encourage broader use of these methods.
@@ -935,10 +935,10 @@ Given an objective function, there are a variety of optimization methods for fin
 as required.   Most of these can be classified as local and global (the others are hybrid).
 %Hybrid methods have been presented by Kucherenko et al. (2009), who used derivatives to obtain global average
 %results, and \citet{Rakovec2014}, who used derivatives to obtain a distribution of results over parameter space. 
-{\it Local methods} start somewhere in the design parameter space and then search in that vicinity for a local extrema
---- the ``closest'' one to the starting point, in some sense.   Some local methods are gradient-based and some are
-gradient-free.  {\it Global methods} seek global extrema, and therefore have some way of looking (or sampling)
-everywhere, not just near a starting point.
+{\it Local methods} start somewhere in the design parameter space and then search in that vicinity for a {\it local
+extrema} --- the ``closest'' one to the starting point, in some sense.   Some local methods are gradient-based and
+some are gradient-free.  {\it Global methods} seek global extrema, and therefore have some way of looking
+(or sampling) everywhere, not just near a starting point.
 
 % Sen and Stoffa isn't in Bibtex file yet. (SDP)
 % global (Sen and Stoffa, 2013) and local (Hill and Tiedeman, 2007)
@@ -1054,7 +1054,11 @@ Programming (SQP) and Newton Methods and Method of Feasible Directions (MFD)
 evaluations at (typically) at least several dozens to several hundreds points in the model parameter space.
 They are best suited to finding local minima near initial guesses.  \\
 
-Many models of physical processes are based on mathematical functions that have continuous first and second derivatives.  In addition, many optimization problems can be formulated in terms of cost (or penalty) functions that have continuous first and second derivatives.  For these types of models, it is often possible to find local extrema (stationary points) of the function using standard methods of calculus, i.e. by determining locations where derivatives are equal to zero. 
+Many models of physical processes are based on mathematical functions that have continuous first and second
+derivatives with respect to their parameters.  In addition, many optimization problems can be formulated in
+terms of cost (or penalty) functions that have continuous first and second derivatives.  For these types of
+models, it is often possible to find local extrema (stationary points) of the function using standard methods
+of calculus, i.e. by determining locations where derivatives are equal to zero. 
 (See Section~\ref{long_profile_nls_problem}.)
 A second derivative test can then be used to determine whether a minimum or maximum occurs at that location.
 % See Section~\ref{long_profile_nls_problem} for a simple example.
@@ -1062,17 +1066,29 @@ For these analytic models, the derivative can be computed by {\it symbolic diffe
 and model code can be written to return the resulting functions evaluated at required points in the parameter space.
 However, this situation is less common in practical geoscience applications.\\
 
-%For computational models which do not have an analytic derivative of simulated data with respect to the model
-%design parameters,
-For computational models which do not provide analytic derivatives of their output variables with respect to the
-design parameters,
-local or global numerical approximations are required.  A global numerical approximation could
-be constructed if the design parameter space is small enough.
+For the typical case where computational models do not provide analytic derivatives of their output variables
+with respect to the design parameters, brute force {\it numerical differentiation} is typically required.
+%to the design parameters, local or global numerical approximations are required.
+% Removed by SDP on 3/2/16.  Not essential and confusing to Mary and others.
+% A global numerical approximation could be constructed if the design parameter space is small enough.
 %that it can be explored in sufficient detail by sampling methods
 %% (Section~\ref{uncertainty_background})
 %that curve-fitting is a viable option.
-The more common
-alternative for practical problems is brute force {\it numerical differentiation}.  To compute the derivative of the
+% For practical problems, brute force {\it numerical differentiation} is typically required.
+%
+%For computational models which do not have an analytic derivative of simulated data with respect to the model
+%design parameters,
+%For computational models which do not provide analytic derivatives of their output variables with respect
+%to the design parameters, numerical approximations are required.
+%to the design parameters, local or global numerical approximations are required.
+% Removed by SDP on 3/2/16.  Not essential and confusing to Mary and others.
+% A global numerical approximation could be constructed if the design parameter space is small enough.
+%that it can be explored in sufficient detail by sampling methods
+%% (Section~\ref{uncertainty_background})
+%that curve-fitting is a viable option.
+%For practical problems, brute force {\it numerical differentiation} is typically required.
+% The more common alternative for practical problems is brute force {\it numerical differentiation}.
+To compute the derivative of the
 objective function by numerical differentiation, each of the model design parameters, $x_i$, is, in turn, slightly
 perturbed around its local value.  The objective function is evaluated for the unperturbed and the perturbed
 parameter, and the difference is taken to estimate one entry in the gradient vector.  The number of forward
@@ -1087,9 +1103,13 @@ the gradient vector
 varies, but typically takes as much time as several (e.g. $2$ to $12$) forward model runs, which could be a great
 improvement over numerical differentiation for large model parameter spaces.\\
 
-Finally, the {\it adjoint state method} \citep{Errico_1997} is available for computing the gradients at the cost of $2$ model runs,
+Finally, the {\it adjoint state method}
+% \citep{Errico_1997}
+is available for computing the gradients at the cost of $2$ model runs,
 % (for each iteration of the inversion)
-by making clever use of certain symmetries in computational model formulations. This method requires writing an alternative {\it adjoint model}, which is similar to the forward model and typically has very similar or identical physics, except for certain sign conventions. However, various convergence complications may arise making the writing of the adjoint code a somewhat nontrivial task. Once the adjoint code exists, it may be used for repeated, extremely efficient, and accurate derivative calculations.
+by making clever use of certain symmetries in computational model formulations.
+\cite{Errico_1997} provides an accessible introduction to this method.
+It requires writing an alternative {\it adjoint model}, which is similar to the forward model and typically has very similar or identical physics, except for certain sign conventions. However, various convergence complications may arise making the writing of the adjoint code a somewhat nontrivial task. Once the adjoint code exists, it may be used for repeated, extremely efficient, and accurate derivative calculations.
 % (see Section~\ref{framework} for details).
 
 % AK: This is actually quite misleading - I wouldn't put it this way; easier to comment out for now than to reword.
@@ -1099,13 +1119,15 @@ by making clever use of certain symmetries in computational model formulations. 
 \subsubsection{Derivative-Free Optimization}
 
 Derivative-free methods do not require computing derivatives of the objective function and can therefore be used for a larger class of optimization problems where continuous derivatives may not exist (including problems with discrete parameters).  These methods can be classified as either {\it local} or {\it global}.  {\it Local methods} use a variety of different algorithms for searching the parameter space for optimal solutions and for refining or focusing the search in the vicinity of good solutions to find better solutions.  Examples include: Pattern Search methods (e.g. Asynchronous Parallel Pattern Search, COLINY Pattern Search and Mesh Adaptive Search), Simplex methods (e.g. Parallel Direct Search, COBYLA and Nelder-Mead) and Greedy Search Heuristic (e.g. Solis-Wets method).  {\it Global methods} simultaneously search across the entire parameter space.
-Examples include:  Evolutionary Algorithms (EA) which are based on concepts from Darwin's Theory of Evolution and concepts from genetics such as natural selection, reproduction, mutation, crossover, inheritance and recombination
+Examples include:  Division of RECTangles (DIRECT) and Evolutionary Algorithms (EA), which are based on concepts
+from Darwin's Theory of Evolution and concepts from genetics (e.g. natural selection, reproduction, mutation,
+crossover, inheritance and recombination).
 % (e.g. coliny\textunderscore ea, soga and moga in DAKOTA)
-and Division of RECTangles (DIRECT).
 % (e.g. ncsu\textunderscore direct and coliny\textunderscore direct in DAKOTA.)
-Implementations of these and other derivative-free methods are also available and documented within DAKOTA.
+Implementations of these and other derivative-free methods are also available and documented within
+the powerful DAKOTA toolkit.
 
-{\it Population-based optimization} is an important class of gradient-free optimization methods.
+{\it Population-based optimization} is another important class of gradient-free optimization methods.
 Examples include:  Genetic Algorithms (e.g. from the larger class of Evolutionary Algorithms), Memetic Algorithms
 (based on the concept of {\it memes}, which combine an evolutionary or population-based algorithm with individual
 learning or local improvement procedures), Swarm Algorithms (e.g. Ant Colony Optimization, Particle Swarm Optimization,
@@ -1687,7 +1709,7 @@ to the same profile data, obtained with the NL2SOL method in DAKOTA.
 % (Sections~\ref{uncertainty_background} and~\ref{uncertainty}).
 
 In addition to helping quantify model uncertainty, modeling frameworks can also be augmented to help reduce
-some, but not all sources of model error.  To better understand this point, it is helpful to first consider various
+some, but not all sources of model error.  To see how, it is helpful to consider various
 sources of error in some detail. 
 %Some sources of model error can be addressed by modeling frameworks
 %A modeling framework can help to reduce some, but not all sources of model error.
@@ -1753,7 +1775,7 @@ Issues include:
 
 The main ways to reduce this type of uncertainty are: (1) better data collection methodologies and (2) careful data
 preparation and documentation (with provenance metadata).  Modeling frameworks provide an ideal platform for
-guiding users through input data preparation steps, checking it for errors, displaying documentation and managing
+guiding users through input data preparation steps, checking data for errors, displaying documentation and managing
 metadata.  As with models, data sets become more reliable and robust when they are used by large groups of people.
 
 \subsection{Model Parameter and Input Data Uncertainties}
@@ -1779,7 +1801,7 @@ modeling frameworks with powerful tools for assessing and quantifying this sourc
 \item Incorrect implementation or developer error (e.g. bugs)
 	\begin{itemize}
 	\item Regressions (bugs due to updates or improvements)
-	\item Bugs may be in software dependencies or in model itself.
+	\item Bugs may be in software dependencies or in the model itself.
 	\item Coordinate projection, sign convention, or units mismatch (and failure to convert)
 	\item Problems at domain boundaries
 	\end{itemize}
@@ -1825,7 +1847,7 @@ Most of these strategies would be straightforward to implement within a modeling
 
 %=======================================================================================
 % \eject
-\section{Including Inverse Modeling and Uncertainty Quantification in a Component-Based Modeling Framework}
+\section{Towards Including Inverse Modeling and Uncertainty Quantification in a Component-Based Modeling Framework}
 \label{framework_inclusion}
 
 Inclusion of uncertainly quantification, parameter estimation and inversion tools in a modeling framework inevitably requires a certain compromise on efficiency, but has the potential to democratize these techniques, providing Earth system modelers with fingertip access to  model validation approaches, without the typically steep learning curve and software development requirements. Here however, we aim to show that in a smart framework, this efficiency compromise may not be a significant drawback. For this, we consider several common use case scenarios, illustrated in Figure~(\ref{fig-model-coupling}).
