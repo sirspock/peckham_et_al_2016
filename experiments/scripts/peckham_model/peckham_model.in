@@ -3,7 +3,7 @@ method
   optpp_g_newton
   max_iterations = 500
   convergence_tolerance = 1e-8
-  # output debug
+  output debug
 
 model						
   id_model = 'BEAVER_PROFILE_DATA'			
